@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:genesys_blog/views/desktop_view/authentication_view/sign_in.dart';
 import 'package:genesys_blog/views/desktop_view/authentication_view/sign_up.dart';
-import 'package:genesys_blog/views/desktop_view/desktop_view.dart';
+import 'package:genesys_blog/views/desktop_view/desktop_view_home_page.dart';
 import 'package:genesys_blog/views/desktop_view/read_news_page.dart';
 import 'package:genesys_blog/views/desktop_view/user_post.dart';
 import 'package:genesys_blog/views/desktop_view/users_dashboard.dart';
@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
       desktop: ScreenUtilInit(designSize: const Size(1446,1112),
         
         builder: (context, c) {
-          return const SignUp();
+          return const DesktopViewHomePage();
         }
       ),
       mobile: Scaffold(

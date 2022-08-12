@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:genesys_blog/constant.dart';
-import 'package:genesys_blog/controllers/home_page_provider.dart';
 import 'package:genesys_blog/widgets/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class DesktopView extends StatelessWidget {
-  const DesktopView({
+class DesktopViewHomePage extends StatelessWidget {
+  const DesktopViewHomePage({
     Key? key,
    
   }) : super(key: key);
@@ -23,7 +22,7 @@ class DesktopView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
-                height: 134.h,
+                height: 145.h,
                 width: double.infinity,
                 color: darkBlueColor,
                 child: Column(
@@ -76,9 +75,24 @@ class DesktopView extends StatelessWidget {
                                 fontSize: 20.sp, color: white)),
                         Text('Education',
                             style: GoogleFonts.poppins(
-                                fontSize: 20.sp, color: white))
+                                fontSize: 20.sp, color: white)),
+                                //Spacer(),
+                                   Padding(
+                          padding: const EdgeInsets.only(right: 20, bottom: 5),
+                          child: Row(
+                            children: [
+                              const CircleAvatar(),
+                              const Gap(10),
+                              Text('Benard',
+                                  style: GoogleFonts.poppins(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w400,
+                                      color: white)),
+                            ],
+                          ),
+                        )
                       ],
-                    )
+                    ),
                   ],
                 )),
            Gap(58.h),
