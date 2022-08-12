@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:genesys_blog/views/desktop_view/authentication_view/sign_in.dart';
+import 'package:genesys_blog/views/desktop_view/desktop_view.dart';
 import 'package:genesys_blog/views/desktop_view/read_news_page.dart';
 import 'package:genesys_blog/views/desktop_view/user_post.dart';
 import 'package:genesys_blog/views/desktop_view/users_dashboard.dart';
 import 'package:genesys_blog/views/home_page.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,7 +35,21 @@ class MyApp extends StatelessWidget {
           // is not restarted.
           primarySwatch: Colors.blue,
         ),
-        home: const UserPost()
+        home: ScreenTypeLayout(
+      desktop: ScreenUtilInit(designSize: Size(1446,1112),
+        
+        builder: (context, c) {
+          return DesktopView();
+        }
+      ),
+      mobile: Scaffold(
+        body: Container(
+          child: Column(
+            children: const [Text('Genesys Blog')],
+          ),
+        ),
+      ),
+    )
       ),
     );
   }
