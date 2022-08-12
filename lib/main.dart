@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:genesys_blog/views/desktop_view/authentication_view/sign_in.dart';
+import 'package:genesys_blog/views/desktop_view/authentication_view/sign_up.dart';
 import 'package:genesys_blog/views/desktop_view/desktop_view.dart';
 import 'package:genesys_blog/views/desktop_view/read_news_page.dart';
 import 'package:genesys_blog/views/desktop_view/user_post.dart';
@@ -36,10 +37,10 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         home: ScreenTypeLayout(
-      desktop: ScreenUtilInit(designSize: Size(1446,1112),
+      desktop: ScreenUtilInit(designSize: const Size(1446,1112),
         
         builder: (context, c) {
-          return DesktopView();
+          return const SignUp();
         }
       ),
       mobile: Scaffold(
