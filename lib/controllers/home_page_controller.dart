@@ -6,24 +6,24 @@ class HomePageProvider extends ChangeNotifier {
   int _currentIndex = 0;
   int get currentIndex => _currentIndex;
   bool load = false;
-  List<NewsModel?>? model;
+  List<NewsModel?>? newsList;
 
   changeIndex(int index) {
     _currentIndex = index;
     notifyListeners();
   }
 
-  Future loadNews() async {
+  Future loadNews({String category = 'news'}) async {
     load = true;
     Post post = Post();
     try {
-      model = await post.getPosts('news');
+      newsList = await post.getPosts(category);
       load = false;
-        notifyListeners();
-      print(model![0]!.articleId);
-      return model;
+      notifyListeners();
+      print(newsList![0]!.articleId);
+      return newsList;
     } catch (e) {
-       load = false;
+      load = false;
     }
     notifyListeners();
   }

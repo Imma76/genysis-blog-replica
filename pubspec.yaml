@@ -36,6 +36,7 @@ dependencies:
   gap: ^2.0.0
   google_fonts: ^2.1.1
   http: ^0.13.5
+  jiffy: ^5.0.0
   markdown_editable_textinput: ^2.0.2
   path: ^1.8.0
   responsive_builder: ^0.4.2
