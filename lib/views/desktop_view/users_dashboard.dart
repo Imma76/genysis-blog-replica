@@ -114,15 +114,15 @@ class _UserDashBoardDesktopViewState
                 style: GoogleFonts.poppins(
                     color: black, fontSize: 20, fontWeight: FontWeight.w500),
               ),
-              Gap(24),
+              const Gap(24),
               ListView.separated(
                   shrinkWrap: true,
                   itemCount: 3,
                   separatorBuilder: (context, int) {
-                    return Divider();
+                    return const Divider();
                   },
                   itemBuilder: (context, index) {
-                    return RecentlyCreated();
+                    return const RecentlyCreated();
                   })
             ],
           ),
@@ -149,14 +149,14 @@ class RecentlyCreated extends StatelessWidget {
               style: GoogleFonts.poppins(
                   color: black, fontSize: 20, fontWeight: FontWeight.w400),
             ),
-            Gap(142),
-            Text('Edit'),
-            Gap(58),
-            Text('Delete')
+            const Gap(142),
+            const Text('Edit'),
+            const Gap(58),
+            const Text('Delete')
           ],
         ),
-        Gap(10),
-        Text('21 May')
+        const Gap(10),
+        const Text('21 May')
       ],
     );
   }
@@ -168,7 +168,8 @@ class DashboardMetricsWidget extends StatelessWidget {
   const DashboardMetricsWidget(
       {Key? key,
       required this.boxType,
-      required this.imagePath,this.width = 310,
+      required this.imagePath,
+      this.width = 310,
       required this.mertricNumber})
       : super(key: key);
 

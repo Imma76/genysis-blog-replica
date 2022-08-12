@@ -60,3 +60,58 @@ class TitleWidget extends StatelessWidget {
     );
   }
 }
+
+
+
+class UserPostsWidget extends StatelessWidget {
+  const UserPostsWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 124,
+      width: 391,
+      padding: const EdgeInsets.all(8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+              'Imperdiet posuere tellus est mi fames sit tincidunt magna bibendum.',
+              textAlign: TextAlign.start,
+              style: GoogleFonts.poppins(
+                  color: black, fontWeight: FontWeight.w500, fontSize: 16)),
+          const Gap(8),
+          Text('Published 10 jan',
+              textAlign: TextAlign.start,
+              style: GoogleFonts.poppins(
+                  color: lightGrey, fontWeight: FontWeight.w400, fontSize: 12)),
+          const Gap(12),
+          Row(
+            children: [
+              Image.asset('assets/views.png', width: 14, height: 12),
+              Text('4',
+                  style: GoogleFonts.poppins(
+                      color: black, fontWeight: FontWeight.w500, fontSize: 12)),
+              const Gap(7),
+              Image.asset('assets/comments.png', width: 14, height: 12),
+              Text('12',
+                  style: GoogleFonts.poppins(
+                      color: black, fontWeight: FontWeight.w500, fontSize: 12)),
+              const Spacer(),
+              Text('Edit',
+                  style: GoogleFonts.poppins(
+                      color: black, fontWeight: FontWeight.w500, fontSize: 12)),
+              const Gap(20),
+              Text('Delete',
+                  style: GoogleFonts.poppins(
+                      color: black, fontWeight: FontWeight.w500, fontSize: 12))
+            ],
+          ),
+        ],
+      ),
+      decoration: BoxDecoration(border: Border.all(color: lightGrey)),
+    );
+  }
+}
