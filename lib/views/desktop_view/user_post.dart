@@ -23,114 +23,116 @@ class _UserPostState extends ConsumerState<UserPost> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Container(
-              height: 114,
-              width: double.infinity,
-              color: darkBlueColor,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+                height: 114,
+                width: double.infinity,
+                color: darkBlueColor,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Gap(17),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 120),
+                      child: Text('Genesys Blog',
+                          style: GoogleFonts.poppins(
+                              fontSize: 24,
+                              fontWeight: FontWeight.w600,
+                              color: white)),
+                    ),
+                  ],
+                )),
+            const Gap(40),
+            Padding(
+              padding: const EdgeInsets.only(left: 44.0),
+              child: Row(
                 children: [
-                  const Gap(17),
+                  SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        const DashboardMetricsWidget(
+                          width: 391,
+                          boxType: 'Posts',
+                          imagePath: 'assets/post.png',
+                          mertricNumber: '10',
+                        ),
+                        const Gap(50),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height / 2,
+                          width: 391,
+                          child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: 4,
+                              itemBuilder: (context, index) {
+                                return const Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: UserPostsWidget(),
+                                );
+                              }),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Spacer(),
                   Padding(
-                    padding: const EdgeInsets.only(left: 120),
-                    child: Text('Genesys Blog',
-                        style: GoogleFonts.poppins(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w600,
-                            color: white)),
-                  ),
-                ],
-              )),
-          const Gap(40),
-          Padding(
-            padding: const EdgeInsets.only(left: 44.0),
-            child: Row(
-              children: [
-                SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      const DashboardMetricsWidget(
-                        width: 391,
-                        boxType: 'Posts',
-                        imagePath: 'assets/post.png',
-                        mertricNumber: '10',
-                      ),
-                      const Gap(50),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height / 2,
-                        width: 391,
-                        child: ListView.builder(
+                    padding: const EdgeInsets.only(right:30.0),
+                    child: Column( 
+                      //mainAxisSize: MainAxisSize.min,
+                        //  crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        
+                        // SizedBox(
+                        //   height:150,
+                        //   child:
+                        // )
+                         SizedBox(
+                          width:600,
+                           child: TextField(       maxLines: 1,
+                decoration: InputDecoration(
+                    border:
+                        OutlineInputBorder(borderSide: BorderSide(color: black))),),
+                         ),
+                        SizedBox(
+                         // height:500,
+                          width:600,
+                          child: ListView(
                             shrinkWrap: true,
-                            itemCount: 4,
-                            itemBuilder: (context, index) {
-                              return const Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: UserPostsWidget(),
-                              );
-                            }),
-                      ),
-                    ],
-                  ),
-                ),
-                const Spacer(),
-                Padding(
-                  padding: const EdgeInsets.only(right:30.0),
-                  child: Column( 
-                    //mainAxisSize: MainAxisSize.min,
-                      //  crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      
-                      // SizedBox(
-                      //   height:150,
-                      //   child:
-                      // )
-                       SizedBox(
-                        width:600,
-                         child: TextField(       maxLines: 1,
-              decoration: InputDecoration(
-                  border:
-                      OutlineInputBorder(borderSide: BorderSide(color: black))),),
-                       ),
-                      SizedBox(
-                       // height:500,
-                        width:600,
-                        child: ListView(
-                          shrinkWrap: true,
-                          children: [
-                            MarkdownTextInput(
-                              (String value) => setState(() => description = value),
-                              description,
-                              label: 'Description',
+                            children: [
+                              MarkdownTextInput(
+                                (String value) => setState(() => description = value),
+                                description,
+                                label: 'Description',
                               maxLines: 20,
-                              actions: MarkdownType.values,
-                              controller: controller,
-                            ),
-                          ],
+                                actions: MarkdownType.values,
+                                controller: controller,
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          controller.clear();
-                        },
-                        child: const Text('Clear'),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: Text(
-                          description,
-                          //   shrinkWrap: true,
+                        TextButton(
+                          onPressed: () {
+                            controller.clear();
+                          },
+                          child: const Text('Clear'),
                         ),
-                      ),
-                    ],
-                  ),
-                ), 
-              ],
-            ),
-          )
-        ],
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Text(
+                            description,
+                            //   shrinkWrap: true,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ), 
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
