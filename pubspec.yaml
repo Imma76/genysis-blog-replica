@@ -27,6 +27,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  cached_network_image: ^3.0.0
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
@@ -34,7 +35,9 @@ dependencies:
   flutter_screenutil: ^5.5.3+2
   gap: ^2.0.0
   google_fonts: ^2.1.1
+  http: ^0.13.5
   markdown_editable_textinput: ^2.0.2
+  path: ^1.8.0
   responsive_builder: ^0.4.2
   shared_preferences: ^2.0.15
   text_style_editor: ^1.1.1

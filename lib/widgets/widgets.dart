@@ -1,4 +1,4 @@
-
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:genesys_blog/constant.dart';
@@ -6,8 +6,15 @@ import 'package:google_fonts/google_fonts.dart';
 
 class NewsWidget extends StatelessWidget {
   final double? height, width, textWidth;
+  final String? image, title, body;
   const NewsWidget(
-      {Key? key, this.height = 365, this.width = 523, this.textWidth = 530})
+      {Key? key,
+      this.height = 365,
+      this.image,
+      this.body,
+      this.title,
+      this.width = 523,
+      this.textWidth = 530})
       : super(key: key);
 
   @override
@@ -16,34 +23,32 @@ class NewsWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Image.asset('assets/peter_obi.png', height: 365, width: 523),
+        CachedNetworkImage(imageUrl: image.toString(), height: 365, width: 523, fit: BoxFit.fill,),
         const Gap(24),
         const Text('June 24, 2022'),
         const Gap(15),
-        const TitleWidget(width: 530),
+        TitleWidget(width: 530, title: title,),
         const Gap(15),
         SizedBox(
           width: textWidth,
-          child: Text(
-              'Malesuada vel arcu arcu aliquam sed sagittis nisi, viverra.Sapien amet velit et non eleifend vulputate sed at. Adipiscing mauris pellentesque purus ut proin. Velit  pulvinar amet elit fames pretium vitae sed ',
+          child: Text(body.toString(),
               style: GoogleFonts.poppins(
                 fontSize: 14,
                 color: black,
                 fontWeight: FontWeight.w400,
               )),
-        ), Text('Read More',
-                                            style:
-                                                TextStyle(color: lightBlue)),
+        ),
+        Text('Read More', style: TextStyle(color: lightBlue)),
       ],
     );
   }
 }
 
-
 class TitleWidget extends StatelessWidget {
   final double? width;
   final double? fontSize;
-  const TitleWidget({Key? key, this.width, this.fontSize = 16})
+  final String? title;
+  const TitleWidget({Key? key, this.title,this.width, this.fontSize = 16})
       : super(key: key);
 
   @override
@@ -51,7 +56,7 @@ class TitleWidget extends StatelessWidget {
     return SizedBox(
       width: width,
       child: Text(
-          'Malesuada vel arcu arcu aliquam sed sagittis nisi, viverra.Sapien amet velit et non eleifend vulputate sed at. Adipiscing mauris pellentesque purus ut proin. Velit  pulvinar amet elit fames pretium vitae sed ',
+          title.toString(),
           style: GoogleFonts.poppins(
             fontSize: fontSize,
             color: black,
@@ -60,8 +65,6 @@ class TitleWidget extends StatelessWidget {
     );
   }
 }
-
-
 
 class UserPostsWidget extends StatelessWidget {
   const UserPostsWidget({

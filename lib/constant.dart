@@ -5,3 +5,4 @@ Color white = Colors.white;
 Color black = Colors.black;
 Color lightBlue = Color(0xff5297FF);
 Color lightGrey = Color(0xff979797);
+String baseUrl = 'https://imma-blog-api.herokuapp.com/api/v2/';
