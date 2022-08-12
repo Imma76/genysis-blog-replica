@@ -50,20 +50,21 @@ class _UserPostState extends ConsumerState<UserPost> {
                                   fontWeight: FontWeight.w600,
                                   color: white)),
                         ),
-                         Padding(
-                    padding: const EdgeInsets.only(right: 20),
-                    child: Row(
-                      children: [
-                        const CircleAvatar(),
-                        const Gap(10),
-                        Text('Benard',
-                            style: GoogleFonts.poppins(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w400,
-                                color: white)),
-                      ],
-                    ),
-                  )
+                        const Spacer(),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 20),
+                          child: Row(
+                            children: [
+                              const CircleAvatar(),
+                              const Gap(10),
+                              Text('Benard',
+                                  style: GoogleFonts.poppins(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w400,
+                                      color: white)),
+                            ],
+                          ),
+                        )
                       ],
                     ),
                   ],
