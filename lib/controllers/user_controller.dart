@@ -34,6 +34,17 @@ class UserController extends ChangeNotifier {
     }
     return true;
   }
+   bool validateSignIn() {
+    if (emailController.text.isEmpty ||
+        passwordController.text.isEmpty 
+       ) {
+      message = 'make sure all fields are complete';
+      notifyListeners();
+      return false;
+    }
+   
+    return true;
+  }
 
   Future<bool> signUpUser() async {
     load = true;
