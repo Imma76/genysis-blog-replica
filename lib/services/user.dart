@@ -28,7 +28,7 @@ class UserService {
     return null;
   }
 
-  Future<UserModel?> loginUser({
+  Future<String> loginUser({
     required String password,
     required String email,
   }) async {
@@ -46,10 +46,10 @@ class UserService {
           firstName: _userModel.firstName.toString(),
           lastName: _userModel.lastName.toString(),
           token: _userModel.token.toString());
-      return _userModel;
+      return 'logged in';
     } catch (e) {
-      print(e.toString());
+      return e.toString();
     }
-    return null;
+  
   }
 }
