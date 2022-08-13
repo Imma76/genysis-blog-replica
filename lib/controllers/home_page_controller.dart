@@ -8,6 +8,8 @@ class HomePageProvider extends ChangeNotifier {
   bool load = false;
   List<NewsModel?>? newsList;
 
+  NewsModel? news;
+
   changeIndex(int index) {
     _currentIndex = index;
     notifyListeners();
@@ -21,6 +23,20 @@ class HomePageProvider extends ChangeNotifier {
       load = false;
       notifyListeners();
       print(newsList![0]!.articleId);
+      return newsList;
+    } catch (e) {
+      load = false;
+    }
+    notifyListeners();
+  }
+  Future loadNewsById(String id) async {
+    load = true;
+    Post post = Post();
+    try {
+      news = await post.getPostsById(id);
+      load = false;
+      notifyListeners();
+     
       return newsList;
     } catch (e) {
       load = false;

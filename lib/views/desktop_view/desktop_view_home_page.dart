@@ -160,7 +160,7 @@ class _DesktopViewPageState extends ConsumerState<DesktopViewHomePage> {
                                 height: 60.h,
                                 child: TextField(
                                   decoration: InputDecoration(
-                                      contentPadding: EdgeInsets.all(10),
+                                      contentPadding: const EdgeInsets.all(10),
                                       prefixIcon: const Icon(Icons.search),
                                       border: OutlineInputBorder(
                                           borderRadius:
@@ -200,7 +200,10 @@ class _DesktopViewPageState extends ConsumerState<DesktopViewHomePage> {
                                               Navigator.push(context,
                                                   MaterialPageRoute(
                                                       builder: (context) {
-                                                return DesktopViewNewsPage();
+                                                return DesktopViewNewsPage(
+                                                    id: _homePageProvider
+                                                        .newsList![index]!.articleId
+                                                        .toString());
                                               }));
                                             },
                                             child: Padding(
