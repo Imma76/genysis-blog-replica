@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
       desktop: ScreenUtilInit(designSize: const Size(1446,1112),
         
         builder: (context, c) {
-          return const DesktopViewHomePage();
+          return const SignUp();
         }
       ),
       mobile: Scaffold(
