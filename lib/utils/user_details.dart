@@ -2,7 +2,7 @@ import 'package:genesys_blog/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserSharedPref {
-  Future storeUser(
+ static  Future storeUser(
       {required String email,
       required String firstName,
       required String lastName,
@@ -14,7 +14,7 @@ class UserSharedPref {
     await _sharedPref.setString('token', token);
   }
 
-  Future<UserModel> getUser() async {
+ static  Future<UserModel> getUser() async {
     SharedPreferences _sharedPref = await SharedPreferences.getInstance();
 
     String? email = _sharedPref.getString('email');

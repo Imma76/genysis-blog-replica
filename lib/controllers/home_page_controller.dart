@@ -17,7 +17,7 @@ class HomePageProvider extends ChangeNotifier {
 
   Future loadNews({String category = 'news'}) async {
     load = true;
-    Post post = Post();
+    PostService post = PostService();
     try {
       newsList = await post.getPosts(category);
       load = false;
@@ -29,14 +29,15 @@ class HomePageProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
+
   Future loadNewsById(String id) async {
     load = true;
-    Post post = Post();
+    PostService post = PostService();
     try {
       news = await post.getPostsById(id);
       load = false;
       notifyListeners();
-     
+
       return newsList;
     } catch (e) {
       load = false;
