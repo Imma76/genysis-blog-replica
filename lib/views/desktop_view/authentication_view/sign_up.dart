@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:genesys_blog/constant.dart';
+import 'package:genesys_blog/controllers/all_providers/all_providers.dart';
+import 'package:genesys_blog/controllers/user_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SignUp extends ConsumerStatefulWidget {
@@ -13,7 +15,15 @@ class SignUp extends ConsumerStatefulWidget {
 
 class _SignUpState extends ConsumerState<SignUp> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    UserProvider _userController = ref.read(userProvider);
+  }
+
+  @override
   Widget build(BuildContext context) {
+    UserProvider _userController = ref.watch(userProvider);
     return Scaffold(
       backgroundColor: darkBlueColor,
       body: Center(
@@ -58,9 +68,10 @@ class _SignUpState extends ConsumerState<SignUp> {
                     SizedBox(
                       height: 50,
                       child: TextField(
+                        controller: _userController.firstNameController,
                         //  maxLines: 0,
                         decoration: InputDecoration(
-                         hintText: 'first name',
+                            hintText: 'first name',
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
                                 borderSide: BorderSide(
@@ -79,6 +90,7 @@ class _SignUpState extends ConsumerState<SignUp> {
                       height: 50,
                       child: TextField(
                         //  maxLines: 0,
+                        controller: _userController.lastNameController,
                         decoration: InputDecoration(
                             hintText: 'last name',
                             enabledBorder: OutlineInputBorder(
@@ -86,10 +98,11 @@ class _SignUpState extends ConsumerState<SignUp> {
                                 borderSide: BorderSide(color: black, width: 1)),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(color: black, width: 1))),
+                                borderSide:
+                                    BorderSide(color: black, width: 1))),
                       ),
                     ),
-                     const Gap(13),
+                    const Gap(13),
                     Text('Email Address',
                         style: GoogleFonts.poppins(
                             fontSize: 14,
@@ -98,8 +111,11 @@ class _SignUpState extends ConsumerState<SignUp> {
                     const Gap(10),
                     SizedBox(
                       height: 50,
-                      child: TextField(
+                      child: TextFormField(
                         //  maxLines: 0,
+                        controller: _userController.emailController,
+                        // validator: (input) =>
+                        //     input!.isValidEmail() ? null : "Check your email",
                         decoration: InputDecoration(
                             hintText: 'email',
                             enabledBorder: OutlineInputBorder(
@@ -107,10 +123,11 @@ class _SignUpState extends ConsumerState<SignUp> {
                                 borderSide: BorderSide(color: black, width: 1)),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(color: black, width: 1))),
+                                borderSide:
+                                    BorderSide(color: black, width: 1))),
                       ),
                     ),
-                     const Gap(13),
+                    const Gap(13),
                     Text('Password',
                         style: GoogleFonts.poppins(
                             fontSize: 14,
@@ -121,6 +138,7 @@ class _SignUpState extends ConsumerState<SignUp> {
                       height: 50,
                       child: TextField(
                         //  maxLines: 0,
+                        controller: _userController.passwordController,
                         decoration: InputDecoration(
                             hintText: 'Enter password',
                             enabledBorder: OutlineInputBorder(
@@ -128,11 +146,11 @@ class _SignUpState extends ConsumerState<SignUp> {
                                 borderSide: BorderSide(color: black, width: 1)),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(color: black, width: 1))),
+                                borderSide:
+                                    BorderSide(color: black, width: 1))),
                       ),
                     ),
                     const Gap(10),
-                  
                     Text('Confirm Password',
                         style: GoogleFonts.poppins(
                             fontSize: 14,
@@ -143,6 +161,7 @@ class _SignUpState extends ConsumerState<SignUp> {
                       height: 50,
                       child: TextField(
                         //  maxLines: 0,
+                        controller: _userController.confirmPasswordController,
                         decoration: InputDecoration(
                             hintText: 'confirm password',
                             enabledBorder: OutlineInputBorder(
@@ -150,18 +169,30 @@ class _SignUpState extends ConsumerState<SignUp> {
                                 borderSide: BorderSide(color: black, width: 1)),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(color: black, width: 1))),
+                                borderSide:
+                                    BorderSide(color: black, width: 1))),
                       ),
                     ),
                     const Gap(24),
                     ElevatedButton(
-                      onPressed: () {},
-                      child: const Text('Sign Up'),
+                      onPressed: () async {
+                        if (_userController.validateSignUp()) {
+                          await _userController.signUpUser(context);
+                        }
+                      },
+                      child: _userController.load
+                          ?  Center(
+                              child: CircularProgressIndicator(color:white),
+                            )
+                          : const Text('Sign Up'),
                       style: ElevatedButton.styleFrom(
-                          primary: darkBlueColor, fixedSize: const Size(480, 52)),
+                          primary: darkBlueColor,
+                          fixedSize: const Size(480, 52)),
                     ),
                     const Gap(8),
-                   
+                    _userController.message != null
+                        ? Text(_userController.message.toString(), style:GoogleFonts.poppins(color:Colors.red,))
+                        : const Text('')
                   ],
                 ),
                 width: 614,

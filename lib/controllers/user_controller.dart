@@ -1,9 +1,19 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:genesys_blog/services/user.dart';
+import 'package:genesys_blog/views/desktop_view/authentication_view/sign_in.dart';
 
-class UserController extends ChangeNotifier {
+extension EmailValidator on String {
+  bool isValidEmail() {
+    return RegExp(
+            r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
+        .hasMatch(this);
+  }
+}
+
+class UserProvider extends ChangeNotifier {
   TextEditingController emailController = TextEditingController();
 
   TextEditingController firstNameController = TextEditingController();
@@ -29,27 +39,34 @@ class UserController extends ChangeNotifier {
     if (passwordController.text.trim() !=
         confirmPasswordController.text.trim()) {
       message = 'passwords do not match';
-        notifyListeners();
+      notifyListeners();
+      return false;
+    }
+    if (emailController.text.trim().isValidEmail() == false) {
+      print('true');
+      message = 'enter a valid email';
+       notifyListeners();
       return false;
     }
     return true;
   }
-   bool validateSignIn() {
-    if (emailController.text.isEmpty ||
-        passwordController.text.isEmpty 
-       ) {
+
+  bool validateSignIn() {
+    if (emailController.text.isEmpty || passwordController.text.isEmpty) {
       message = 'make sure all fields are complete';
       notifyListeners();
       return false;
     }
-   
+
     return true;
   }
 
-  Future<bool> signUpUser() async {
-    load = true;
+  Future<bool> signUpUser(context) async {
+    
     UserService _userService = UserService();
     try {
+       load = true;
+       notifyListeners();
       final uMessage = await _userService.signUpUser(
           password: passwordController.text.trim(),
           email: emailController.text.trim(),
@@ -58,12 +75,22 @@ class UserController extends ChangeNotifier {
       message = uMessage;
       load = false;
       notifyListeners();
+      if(message =='user created successfully'){
+         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+        return SignIn();
+      }));
+      }
+     
       return true;
     } on SocketException {
+        load = false;
       message = 'no internet connection';
+      notifyListeners();
       return false;
     } catch (e) {
+        load = false;
       message = e.toString();
+      notifyListeners();
       return false;
     }
   }

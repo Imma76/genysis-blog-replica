@@ -19,7 +19,7 @@ class UserService {
         'email': email,
         'password': password,
       };
-      var response = await http.post(Uri.parse(baseUrl + 'user'), body: body);
+      var response = await http.post(Uri.parse(baseUrl + 'users'), body: body);
       var decode = jsonDecode(response.body);
       return decode['message'];
     } catch (e) {
@@ -37,7 +37,7 @@ class UserService {
         'email': email,
         'password': password,
       };
-      var response = await http.post(Uri.parse(baseUrl + 'user'), body: body);
+      var response = await http.post(Uri.parse(baseUrl + 'users'), body: body);
       var decode = jsonDecode(response.body);
 
       UserModel _userModel = UserModel.fromJson(decode['body']['data']);
