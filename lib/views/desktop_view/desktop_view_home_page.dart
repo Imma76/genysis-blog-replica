@@ -6,9 +6,12 @@ import 'package:gap/gap.dart';
 import 'package:genesys_blog/constant.dart';
 import 'package:genesys_blog/controllers/all_providers/all_providers.dart';
 import 'package:genesys_blog/controllers/home_page_controller.dart';
+import 'package:genesys_blog/controllers/user_controller.dart';
 import 'package:genesys_blog/views/desktop_view/read_news_page.dart';
 import 'package:genesys_blog/widgets/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:just_the_tooltip/just_the_tooltip.dart';
+import 'package:super_tooltip/super_tooltip.dart';
 
 class DesktopViewHomePage extends ConsumerStatefulWidget {
   const DesktopViewHomePage({Key? key}) : super(key: key);
@@ -25,11 +28,27 @@ class _DesktopViewPageState extends ConsumerState<DesktopViewHomePage> {
     super.initState();
     HomePageProvider _homePageProvider = ref.read(homePageProvider);
     _homePageProvider.loadNews();
+    UserProvider _userController = ref.read(userProvider);
+    _userController.init();
   }
+
+  SuperTooltip tooltip = SuperTooltip(
+    popupDirection: TooltipDirection.right,
+    top: 50.0,
+    right: 5.0,
+    left: 100.0,
+    maxWidth: 50,
+    content: const Material(
+        child: Text(
+      "Lorem ipsum dolor sit amet, consetetur sadipscingelitr, ",
+      softWrap: true,
+    )),
+  );
 
   @override
   Widget build(BuildContext context) {
     HomePageProvider _homePageProvider = ref.watch(homePageProvider);
+    UserProvider _userController = ref.watch(userProvider);
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -78,9 +97,10 @@ class _DesktopViewPageState extends ConsumerState<DesktopViewHomePage> {
                                         fontSize: 20.sp, color: white)),
                               ),
                               GestureDetector(
-                                onTap: () {
+                                onTap: () async {
                                   _homePageProvider.loadNews(
                                       category: 'politics');
+                                  //   await UserSharedPref.clear();
                                 },
                                 child: Text('Politics',
                                     style: GoogleFonts.poppins(
@@ -123,19 +143,159 @@ class _DesktopViewPageState extends ConsumerState<DesktopViewHomePage> {
                                         fontSize: 20.sp, color: white)),
                               ),
                               //Spacer(),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(right: 20, bottom: 5),
-                                child: Row(
-                                  children: [
-                                    const CircleAvatar(),
-                                    const Gap(10),
-                                    Text('Benard',
-                                        style: GoogleFonts.poppins(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w400,
-                                            color: white)),
-                                  ],
+                              Visibility(
+                                visible:  _userController
+                                                              .firstName
+                                                              != null,
+                                child: JustTheTooltip(
+                                  onDismiss: () {},
+                                  showDuration: const Duration(seconds: 3),
+                                  //  isModal: true,
+                                  content: Container(
+                                    height: 303,
+                                    width: 263,
+                                    padding: const EdgeInsets.only(
+                                      left: 22,
+                                    ),
+                                    color: white,
+                                    child: Center(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Center(
+                                                child: Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    CircleAvatar(
+                                                        child: CachedNetworkImage(
+                                                            imageUrl:
+                                                                _userController
+                                                                    .photo
+                                                                    .toString())),
+                                                    const Gap(20),
+                                                    Column(
+                                                      children: [
+                                                        Text(
+                                                            _userController
+                                                                .firstName
+                                                                .toString(),
+                                                            style: GoogleFonts
+                                                                .poppins(
+                                                                    fontSize: 20,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    color:
+                                                                        black)),
+                                                        const Gap(5),
+                                                        Text(
+                                                            _userController.email
+                                                                .toString(),
+                                                            style: GoogleFonts
+                                                                .poppins(
+                                                                    fontSize: 10,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    color:
+                                                                        black)),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              const Gap(20),
+                                              GestureDetector(
+                                                  onTap: () {},
+                                                  child: Text('Dashboard',
+                                                      style: GoogleFonts.poppins(
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: black))),
+                                              const Gap(15),
+                                              GestureDetector(
+                                                  onTap: () {},
+                                                  child: Text('Posts',
+                                                      style: GoogleFonts.poppins(
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: black))),
+                                              const Gap(15),
+                                              GestureDetector(
+                                                  onTap: () {},
+                                                  child: Text('Drafts',
+                                                      style: GoogleFonts.poppins(
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: black))),
+                                              const Gap(15),
+                                              GestureDetector(
+                                                  onTap: () {},
+                                                  child: Text('Profile settings',
+                                                      style: GoogleFonts.poppins(
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: black))),
+                                              const Gap(15),
+                                              GestureDetector(
+                                                  onTap: () {},
+                                                  child: Text('Sign out',
+                                                      style: GoogleFonts.poppins(
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: Colors.red))),
+                                            ]),
+                                      ),
+                                    ),
+                                  ),
+                                  //   waitDuration: const Duration(seconds: 1),
+                                  // // showDuration: const Duration(seconds: 2),
+                                  // padding: const EdgeInsets.all(5),
+                                  // height: 35,
+                                  // textStyle: const TextStyle(
+                                  //     fontSize: 15,
+                                  //     color: Colors.white,
+                                  //     fontWeight: FontWeight.normal),
+                                  // decoration: BoxDecoration(
+                                  //     borderRadius: BorderRadius.circular(10),
+                                  //     color: Colors.green),
+                                  // message:"kkk",
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      // tooltip.show(context);
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          right: 20, bottom: 5),
+                                      child: Row(
+                                        children: [
+                                          CircleAvatar(
+                                              child: CachedNetworkImage(
+                                                  imageUrl: _userController.photo
+                                                      .toString())),
+                                          const Gap(10),
+                                          Text(
+                                              _userController.firstName
+                                                  .toString(),
+                                              style: GoogleFonts.poppins(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w400,
+                                                  color: white)),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               )
                             ],
@@ -202,7 +362,8 @@ class _DesktopViewPageState extends ConsumerState<DesktopViewHomePage> {
                                                       builder: (context) {
                                                 return DesktopViewNewsPage(
                                                     id: _homePageProvider
-                                                        .newsList![index]!.articleId
+                                                        .newsList![index]!
+                                                        .articleId
                                                         .toString());
                                               }));
                                             },

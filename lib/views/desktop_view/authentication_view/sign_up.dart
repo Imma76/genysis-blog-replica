@@ -6,6 +6,8 @@ import 'package:genesys_blog/controllers/all_providers/all_providers.dart';
 import 'package:genesys_blog/controllers/user_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'sign_in.dart';
+
 class SignUp extends ConsumerStatefulWidget {
   const SignUp({Key? key}) : super(key: key);
 
@@ -192,7 +194,36 @@ class _SignUpState extends ConsumerState<SignUp> {
                     const Gap(8),
                     _userController.message != null
                         ? Text(_userController.message.toString(), style:GoogleFonts.poppins(color:Colors.red,))
-                        : const Text('')
+                        : const Text(''),
+
+                         GestureDetector(
+                    onTap: () {
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) {
+                        return SignIn();
+                      }));
+                    },
+                    child: Center(
+                      child: RichText(
+                        text: TextSpan(
+                          children: <TextSpan>[
+                            TextSpan(
+                                text: 'Have an account?',
+                                style: GoogleFonts.poppins(
+                                    fontSize: 16,
+                                    color: black,
+                                    fontWeight: FontWeight.w400)),
+                            TextSpan(
+                                text: ' Sign in',
+                                style: GoogleFonts.poppins(
+                                    fontSize: 16,
+                                    color: lightBlue,
+                                    fontWeight: FontWeight.w400)),
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
                   ],
                 ),
                 width: 614,

@@ -38,10 +38,12 @@ dependencies:
   google_fonts: ^2.1.1
   http: ^0.13.5
   jiffy: ^5.0.0
+  just_the_tooltip: ^0.0.11+2
   markdown_editable_textinput: ^2.0.2
   path: ^1.8.0
   responsive_builder: ^0.4.2
   shared_preferences: ^2.0.15
+  super_tooltip: ^1.0.1
   text_style_editor: ^1.1.1
 
 dev_dependencies:

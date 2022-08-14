@@ -7,9 +7,9 @@ class UserModel {
   String? photo;
 
   UserModel(
-      {this.email, this.firstName, this.lastName, this.token, this.userId});
+      {this.email, this.firstName, this.lastName, this.token, this.userId, this.photo});
 
-  UserModel.fromJson(Map data) {
+  UserModel.fromJson(Map data, ) {
     firstName = data['firstName'];
     lastName = data['lastName'];
     email = data['email'];
