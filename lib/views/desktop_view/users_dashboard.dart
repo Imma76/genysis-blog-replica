@@ -206,3 +206,34 @@ class DashboardMetricsWidget extends StatelessWidget {
     );
   }
 }
+
+class DraftsWidget extends StatelessWidget {
+  final String? title, date;
+  const DraftsWidget({
+    Key? key,this.date, this.title
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Text(
+              title.toString(),
+              style: GoogleFonts.poppins(
+                  color: black, fontSize: 20, fontWeight: FontWeight.w400),
+            ),
+            const Gap(142),
+            const Text('Edit'),
+            const Gap(58),
+            const Text('Delete')
+          ],
+        ),
+        const Gap(10),
+        const Text('21 May')
+      ],
+    );
+  }
+}

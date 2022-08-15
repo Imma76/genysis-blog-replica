@@ -75,6 +75,18 @@ class _DesktopViewPageState extends ConsumerState<DesktopViewHomePage> {
                       ),
                     ),
                     const Gap(20),
+                     GestureDetector(
+                        onTap: () {
+                           _homePageProvider.changeIndex(0);
+                        },
+                        child: ListTile(
+                          title: Text('Home',
+                              style: GoogleFonts.poppins(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                  color: black)),
+                        )),
+                    const Gap(15),
                     GestureDetector(
                         onTap: () {},
                         child: ListTile(
@@ -168,54 +180,73 @@ class _DesktopViewPageState extends ConsumerState<DesktopViewHomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    GestureDetector(
-                      onTap: () {
-                        _homePageProvider.loadNews(category: 'news');
-                      },
-                      child: Text('News',
-                          style: GoogleFonts.poppins(
-                              fontSize: 20.sp, color: white)),
+                  
+                    Visibility(
+                      visible:_homePageProvider.currentIndex ==0,
+                      child: GestureDetector(
+                        onTap: () {
+                          _homePageProvider.loadNews(category: 'news');
+                        },
+                        child: Text('News',
+                            style: GoogleFonts.poppins(
+                                fontSize: 20.sp, color: white)),
+                      ),
                     ),
-                    GestureDetector(
-                      onTap: () async {
-                        _homePageProvider.loadNews(category: 'politics');
-                        //   await UserSharedPref.clear();
-                      },
-                      child: Text('Politics',
-                          style: GoogleFonts.poppins(
-                              fontSize: 20.sp, color: white)),
+                   Visibility(
+                      visible:_homePageProvider.currentIndex ==0,
+                      child: GestureDetector(
+                        onTap: () async {
+                          _homePageProvider.loadNews(category: 'politics');
+                          //   await UserSharedPref.clear();
+                        },
+                        child: Text('Politics',
+                            style: GoogleFonts.poppins(
+                                fontSize: 20.sp, color: white)),
+                      ),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        _homePageProvider.loadNews(category: 'entertainment');
-                      },
-                      child: Text('Entertainment',
-                          style: GoogleFonts.poppins(
-                              fontSize: 20.sp, color: white)),
+                    Visibility(
+                      visible:_homePageProvider.currentIndex ==0,
+                      child: GestureDetector(
+                        onTap: () {
+                          _homePageProvider.loadNews(category: 'entertainment');
+                        },
+                        child: Text('Entertainment',
+                            style: GoogleFonts.poppins(
+                                fontSize: 20.sp, color: white)),
+                      ),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        _homePageProvider.loadNews(category: 'technology');
-                      },
-                      child: Text('Technology',
-                          style: GoogleFonts.poppins(
-                              fontSize: 20.sp, color: white)),
+                    Visibility(
+                      visible:_homePageProvider.currentIndex ==0,
+                      child: GestureDetector(
+                        onTap: () {
+                          _homePageProvider.loadNews(category: 'technology');
+                        },
+                        child: Text('Technology',
+                            style: GoogleFonts.poppins(
+                                fontSize: 20.sp, color: white)),
+                      ),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        _homePageProvider.loadNews(category: 'sports');
-                      },
-                      child: Text('Sports',
-                          style: GoogleFonts.poppins(
-                              fontSize: 20.sp, color: white)),
+                     Visibility(
+                      visible:_homePageProvider.currentIndex ==0,
+                      child: GestureDetector(
+                        onTap: () {
+                          _homePageProvider.loadNews(category: 'sports');
+                        },
+                        child: Text('Sports',
+                            style: GoogleFonts.poppins(
+                                fontSize: 20.sp, color: white)),
+                      ),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        _homePageProvider.loadNews(category: 'education');
-                      },
-                      child: Text('Education',
-                          style: GoogleFonts.poppins(
-                              fontSize: 20.sp, color: white)),
+                     Visibility(
+                      visible:_homePageProvider.currentIndex ==0,
+                      child: GestureDetector(
+                        onTap: () {
+                          _homePageProvider.loadNews(category: 'education');
+                        },
+                        child: Text('Education',
+                            style: GoogleFonts.poppins(
+                                fontSize: 20.sp, color: white)),
+                      ),
                     ),
                     //Spacer(),
                     Visibility(
