@@ -1,12 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:genesys_blog/models/post_model.dart';
 import 'package:genesys_blog/services/post.dart';
+import 'package:genesys_blog/views/desktop_view/home_page.dart';
+import 'package:genesys_blog/views/desktop_view/user_drafts.dart';
+import 'package:genesys_blog/views/desktop_view/user_post.dart';
 
 class HomePageController extends ChangeNotifier {
   int _currentIndex = 0;
   int get currentIndex => _currentIndex;
   bool load = false;
   List<PostsModel?>? newsList;
+  List<Widget> widgetList = [
+    HomePage(),
+    UserPost(),
+    UserDrafts(),
+  ];
+
 
   PostsModel? news;
 

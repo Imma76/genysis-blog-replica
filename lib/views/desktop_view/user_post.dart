@@ -45,8 +45,7 @@ class _UserPostState extends ConsumerState<UserPost> {
     PostController postController = ref.watch(postProvider);
     UserController _userController = ref.watch(userProvider);
 
-    return Scaffold(
-      body: SingleChildScrollView(
+    return  SingleChildScrollView(
         child: postController.load
             ? Center(
                 child: CircularProgressIndicator(
@@ -54,47 +53,7 @@ class _UserPostState extends ConsumerState<UserPost> {
               ))
             : Column(
                 children: [
-                  Container(
-                      height: 114,
-                      width: double.infinity,
-                      color: darkBlueColor,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Gap(17),
-                          Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 120),
-                                child: Text('Genesys Blog',
-                                    style: GoogleFonts.poppins(
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.w600,
-                                        color: white)),
-                              ),
-                              const Spacer(),
-                              Padding(
-                                padding: const EdgeInsets.only(right: 20),
-                                child: Row(
-                                  children: [
-                                    CircleAvatar(
-                                        child: CachedNetworkImage(
-                                            imageUrl: _userController.photo
-                                                .toString())),
-                                    const Gap(10),
-                                    Text(_userController.firstName.toString(),
-                                        style: GoogleFonts.poppins(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w400,
-                                            color: white)),
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                        ],
-                      )),
+                 
                   const Gap(40),
                   Padding(
                     padding: const EdgeInsets.only(left: 44.0),
@@ -108,13 +67,13 @@ class _UserPostState extends ConsumerState<UserPost> {
                                 boxType: 'Posts',
                                 imagePath: 'assets/post.png',
                                 mertricNumber:
-                                    '${postController.posts!.length}',
+                                    '${postController.userPosts!.length}',
                               ),
                               const Gap(50),
                               SizedBox(
                                 height: MediaQuery.of(context).size.height / 2,
                                 width: 391,
-                                child: postController.posts!.isEmpty
+                                child: postController.userPosts!.isEmpty
                                     ? Column(
                                         children: [
                                           Image.asset(
@@ -129,11 +88,18 @@ class _UserPostState extends ConsumerState<UserPost> {
                                       )
                                     : ListView.builder(
                                         shrinkWrap: true,
-                                        itemCount: postController.posts!.length,
+                                        itemCount:
+                                            postController.userPosts!.length,
                                         itemBuilder: (context, index) {
-                                          return const Padding(
-                                            padding: EdgeInsets.all(8.0),
-                                            child: UserPostsWidget(),
+                                          return Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: UserPostsWidget(
+                                              views: postController
+                                                  .userPosts![index]!.views
+                                                  .toString(),
+                                              articleId: postController
+                                                  .userPosts![0]!.articleId,
+                                            ),
                                           );
                                         }),
                               ),
@@ -265,7 +231,7 @@ class _UserPostState extends ConsumerState<UserPost> {
                   )
                 ],
               ),
-      ),
+      
     );
   }
 }

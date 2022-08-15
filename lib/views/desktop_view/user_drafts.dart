@@ -27,48 +27,10 @@ class _UserDraftsState extends ConsumerState<UserDrafts> {
   TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
+    return  SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-                height: 114,
-                width: double.infinity,
-                color: darkBlueColor,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Gap(17),
-                    Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 120),
-                          child: Text('Genesys Blog',
-                              style: GoogleFonts.poppins(
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.w600,
-                                  color: white)),
-                        ),
-                        const Spacer(),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 20),
-                          child: Row(
-                            children: [
-                              const CircleAvatar(),
-                              const Gap(10),
-                              Text('Benard',
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w400,
-                                      color: white)),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
-                )),
+           
             const Gap(40),
             Padding(
               padding: const EdgeInsets.only(left: 44.0),
@@ -220,7 +182,7 @@ class _UserDraftsState extends ConsumerState<UserDrafts> {
             )
           ],
         ),
-      ),
+      
     );
   }
 }

@@ -4,7 +4,7 @@ import 'package:genesys_blog/services/post.dart';
 import '../models/post_model.dart';
 
 class PostController extends ChangeNotifier {
-  List<PostsModel?>? posts;
+  List<PostsModel?>? userPosts;
   bool load = false;
   PostsModel? news;
 
@@ -16,7 +16,7 @@ class PostController extends ChangeNotifier {
       load = false;
       notifyListeners();
 
-     // return newsList;
+      // return newsList;
     } catch (e) {
       load = false;
     }
@@ -27,8 +27,8 @@ class PostController extends ChangeNotifier {
     try {
       load = true;
       PostService postService = PostService();
-      posts = await postService.getUserPosts();
-       load = false;
+      userPosts = await postService.getUserPosts();
+      load = false;
       notifyListeners();
     } catch (e) {
       print(e.toString());
