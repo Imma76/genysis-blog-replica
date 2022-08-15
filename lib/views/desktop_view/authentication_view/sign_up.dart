@@ -20,12 +20,12 @@ class _SignUpState extends ConsumerState<SignUp> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    UserProvider _userController = ref.read(userProvider);
+    UserController _userController = ref.read(userProvider);
   }
 
   @override
   Widget build(BuildContext context) {
-    UserProvider _userController = ref.watch(userProvider);
+    UserController _userController = ref.watch(userProvider);
     return Scaffold(
       backgroundColor: darkBlueColor,
       body: Center(
@@ -200,7 +200,7 @@ class _SignUpState extends ConsumerState<SignUp> {
                     onTap: () {
                       Navigator.pushReplacement(context,
                           MaterialPageRoute(builder: (context) {
-                        return SignIn();
+                        return const SignIn();
                       }));
                     },
                     child: Center(

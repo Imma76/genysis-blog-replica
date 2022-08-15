@@ -1,26 +1,35 @@
-class Posts {
+class PostsModel {
   String? title;
-  String? body;
   String? image;
-  String? postId;
-  String? postViews;
-  DateTime? createdAt;
-  DateTime? updatedAt;
-  Posts(
+  String? body;
+  String? newsDate;
+  int? views;
+  String? category;
+  String? createdAt;
+  String? updatedAt;
+  String? userId;
+  String? articleId;
+
+  PostsModel(
       {this.body,
-      this.createdAt,
+      // this.comments,
+      this.category,
       this.image,
-      this.postId,
-      this.postViews,
+      this.newsDate,
+      this.articleId,
+      this.userId,
       this.title,
-      this.updatedAt});
-  Posts.fromJson(Map data) {
+      this.views});
+  PostsModel.fromJson(Map data) {
     title = data['title'];
     body = data['body'];
     image = data['image'];
+    views = data['views'];
+    articleId = data['_id'];
+    category = data['category'];
     createdAt = data['createdAt'];
     updatedAt = data['updatedAt'];
-    postId = data['_id'];
-    postViews = data['views'];
+    userId = data['userId'];
+    //   comments = data['comments'];
   }
 }

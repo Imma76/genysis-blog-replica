@@ -17,7 +17,7 @@ extension EmailValidator on String {
   }
 }
 
-class UserProvider extends ChangeNotifier {
+class UserController extends ChangeNotifier {
   TextEditingController emailController = TextEditingController();
 
   TextEditingController firstNameController = TextEditingController();
@@ -69,9 +69,6 @@ class UserProvider extends ChangeNotifier {
 
     return true;
   }
-  void getUserPosts()async{
-    
-  }
 
   void init() async {
     UserModel _userModel = await UserSharedPref.getUser();
@@ -100,7 +97,7 @@ class UserProvider extends ChangeNotifier {
         passwordController.clear();
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) {
-          return SignIn();
+          return const SignIn();
         }));
       }
 
@@ -135,7 +132,7 @@ class UserProvider extends ChangeNotifier {
         passwordController.clear();
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) {
-          return DesktopViewHomePage();
+          return const DesktopViewHomePage();
         }));
       }
       return true;

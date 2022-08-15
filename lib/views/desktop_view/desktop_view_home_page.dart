@@ -12,7 +12,6 @@ import 'package:genesys_blog/views/desktop_view/user_drafts.dart';
 import 'package:genesys_blog/views/desktop_view/user_post.dart';
 import 'package:genesys_blog/widgets/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hovering/hovering.dart';
 import 'package:super_tooltip/super_tooltip.dart';
 
 class DesktopViewHomePage extends ConsumerStatefulWidget {
@@ -28,9 +27,9 @@ class _DesktopViewPageState extends ConsumerState<DesktopViewHomePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    HomePageProvider _homePageProvider = ref.read(homePageProvider);
+    HomePageController _homePageProvider = ref.read(homePageProvider);
     _homePageProvider.loadNews();
-    UserProvider _userController = ref.read(userProvider);
+    UserController _userController = ref.read(userProvider);
     _userController.init();
   }
 
@@ -50,8 +49,8 @@ class _DesktopViewPageState extends ConsumerState<DesktopViewHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    HomePageProvider _homePageProvider = ref.watch(homePageProvider);
-    UserProvider _userController = ref.watch(userProvider);
+    HomePageController _homePageProvider = ref.watch(homePageProvider);
+    UserController _userController = ref.watch(userProvider);
 
     return Scaffold(
       key: _key,
@@ -92,7 +91,6 @@ class _DesktopViewPageState extends ConsumerState<DesktopViewHomePage> {
               GestureDetector(
                   onTap: () {},
                   child: ListTile(
-
                     title: Text('Dashboard',
                         style: GoogleFonts.poppins(
                             fontSize: 14,
@@ -143,7 +141,6 @@ class _DesktopViewPageState extends ConsumerState<DesktopViewHomePage> {
               GestureDetector(
                   onTap: () {},
                   child: ListTile(
-
                     title: Text('Sign out',
                         style: GoogleFonts.poppins(
                             fontSize: 14,

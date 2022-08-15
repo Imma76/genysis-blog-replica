@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:genesys_blog/constant.dart';
 import 'package:genesys_blog/controllers/all_providers/all_providers.dart';
 import 'package:genesys_blog/controllers/home_page_controller.dart';
+import 'package:genesys_blog/controllers/post_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DesktopViewNewsPage extends ConsumerStatefulWidget {
@@ -21,13 +22,14 @@ class _DesktopViewNewsPageState extends ConsumerState<DesktopViewNewsPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    HomePageProvider _homePageProvider = ref.read(homePageProvider);
-    _homePageProvider.loadNewsById(widget.id);
+   PostController postController = ref.read(postProvider);
+
+    postController.loadNewsById(widget.id);
   }
 
   @override
   Widget build(BuildContext context) {
-    HomePageProvider _homePageProvider = ref.watch(homePageProvider);
+    HomePageController _homePageProvider = ref.watch(homePageProvider);
     return Scaffold(
       body: SingleChildScrollView(
         child: _homePageProvider.load
@@ -93,7 +95,7 @@ class _DesktopViewNewsPageState extends ConsumerState<DesktopViewNewsPage> {
                               width: 20,
                               child: Text(
                                   '${_homePageProvider.news!.views}')),
-                          Text('VIEWS'),
+                          const Text('VIEWS'),
                         ],
                       ),
                       const Gap(24),
@@ -254,7 +256,7 @@ class _DesktopViewNewsPageState extends ConsumerState<DesktopViewNewsPage> {
                           color: black,
                           fontWeight: FontWeight.w400)),
                 ),
-                Gap(150),
+                const Gap(150),
               ]),
       ),
     );
