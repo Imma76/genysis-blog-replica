@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
@@ -77,9 +78,12 @@ class _UserPostState extends ConsumerState<UserPost> {
                                 padding: const EdgeInsets.only(right: 20),
                                 child: Row(
                                   children: [
-                                    const CircleAvatar(),
+                                    CircleAvatar(
+                                        child: CachedNetworkImage(
+                                            imageUrl: _userController.photo
+                                                .toString())),
                                     const Gap(10),
-                                    Text('Benard',
+                                    Text(_userController.firstName.toString(),
                                         style: GoogleFonts.poppins(
                                             fontSize: 20,
                                             fontWeight: FontWeight.w400,
@@ -114,12 +118,13 @@ class _UserPostState extends ConsumerState<UserPost> {
                                     ? Column(
                                         children: [
                                           Image.asset(
-                                              'assets/nothing-found.png', height:300),
-                                         Text('You have no Post',
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.w500,
-                                      color: black)),
+                                              'assets/nothing-found.png',
+                                              height: 300),
+                                          Text('You have no Post',
+                                              style: GoogleFonts.poppins(
+                                                  fontSize: 24,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: black)),
                                         ],
                                       )
                                     : ListView.builder(

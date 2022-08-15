@@ -62,16 +62,18 @@ class PostService {
       UserModel _userData = await UserSharedPref.getUser();
       print(_userData.userId);
       var response = await http.get(
-        Uri.parse(baseUrl + 'post/id/${_userData.userId}'),
+        Uri.parse(baseUrl + 'post/userpost/${_userData.userId}'),
+        headers: {
+          'Authorization':'Bearer ${_userData.token}'
+        }
       );
       var decode = jsonDecode(response.body);
-      print(decode);
       if (decode['body'] == 'no post found') {
         return postList;
       }
       for (int post = 0; post < decode['body'].length; post++) {
         PostsModel _posts = PostsModel.fromJson(
-          decode['body'],
+          decode['body'][post],
         );
 
         postList.add(_posts);
