@@ -36,7 +36,9 @@ class _UserDraftsState extends ConsumerState<UserDrafts> {
     return SingleChildScrollView(
         child: Padding(
       padding: const EdgeInsets.only(left: 44.0),
-      child: Column(children: [
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
         Gap(20),
         const DashboardMetricsWidget(
           width: 391,
