@@ -69,6 +69,9 @@ class UserProvider extends ChangeNotifier {
 
     return true;
   }
+  void getUserPosts()async{
+    
+  }
 
   void init() async {
     UserModel _userModel = await UserSharedPref.getUser();

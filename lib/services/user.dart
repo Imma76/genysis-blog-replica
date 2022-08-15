@@ -37,19 +37,45 @@ class UserService {
         'email': email,
         'password': password,
       };
-      var response = await http.post(Uri.parse(baseUrl + 'users/login'), body: body);
+      var response =
+          await http.post(Uri.parse(baseUrl + 'users/login'), body: body);
       var decode = jsonDecode(response.body);
 
-      UserModel _userModel = UserModel.fromJson(decode['body']['data'], );
+      UserModel _userModel = UserModel.fromJson(
+        decode['body']['data'],
+      );
       await UserSharedPref.storeUser(
           email: _userModel.email.toString(),
           firstName: _userModel.firstName.toString(),
           lastName: _userModel.lastName.toString(),
-          token: decode['body']['token'], image:_userModel.photo.toString() );
+          token: decode['body']['token'],
+          image: _userModel.photo.toString());
       return decode;
     } catch (e) {
       return e.toString();
     }
-  
+  }
+
+  Future getUserPosts() async {
+    try {
+      UserModel _userData = await UserSharedPref.getUser();
+      var response = await http.get(
+        Uri.parse(baseUrl + 'post/id/${_userData.userId}'),
+      );
+      var decode = jsonDecode(response.body);
+
+      UserModel _userModel = UserModel.fromJson(
+        decode['body']['data'],
+      );
+      await UserSharedPref.storeUser(
+          email: _userModel.email.toString(),
+          firstName: _userModel.firstName.toString(),
+          lastName: _userModel.lastName.toString(),
+          token: decode['body']['token'],
+          image: _userModel.photo.toString());
+      return decode;
+    } catch (e) {
+      return e.toString();
+    }
   }
 }
