@@ -60,10 +60,15 @@ class PostService {
     List<PostsModel?> postList = [];
     try {
       UserModel _userData = await UserSharedPref.getUser();
+      print(_userData.userId);
       var response = await http.get(
         Uri.parse(baseUrl + 'post/id/${_userData.userId}'),
       );
       var decode = jsonDecode(response.body);
+      print(decode);
+      if (decode['body'] == 'no post found') {
+        return postList;
+      }
       for (int post = 0; post < decode['body'].length; post++) {
         PostsModel _posts = PostsModel.fromJson(
           decode['body'],
@@ -72,7 +77,6 @@ class PostService {
         postList.add(_posts);
       }
       return postList;
-      
     } catch (e) {
       print(e.toString());
     }

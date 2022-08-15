@@ -5,10 +5,10 @@ import '../models/post_model.dart';
 
 class PostController extends ChangeNotifier {
   List<PostsModel?>? posts;
-    bool load = false;
-      PostsModel? news;
-  List<PostsModel?>? newsList;
-    Future loadNewsById(String id) async {
+  bool load = false;
+  PostsModel? news;
+
+  Future loadNewsById(String id) async {
     load = true;
     PostService post = PostService();
     try {
@@ -16,16 +16,24 @@ class PostController extends ChangeNotifier {
       load = false;
       notifyListeners();
 
-      return newsList;
+     // return newsList;
     } catch (e) {
       load = false;
     }
     notifyListeners();
   }
+
   Future getUserPosts() async {
     try {
+      load = true;
       PostService postService = PostService();
       posts = await postService.getUserPosts();
-    } catch (e) {}
+       load = false;
+      notifyListeners();
+    } catch (e) {
+      print(e.toString());
+      load = false;
+      notifyListeners();
+    }
   }
 }

@@ -7,6 +7,7 @@ import 'package:genesys_blog/constant.dart';
 import 'package:genesys_blog/controllers/all_providers/all_providers.dart';
 import 'package:genesys_blog/controllers/home_page_controller.dart';
 import 'package:genesys_blog/controllers/user_controller.dart';
+import 'package:genesys_blog/utils/user_details.dart';
 import 'package:genesys_blog/views/desktop_view/read_news_page.dart';
 import 'package:genesys_blog/views/desktop_view/user_drafts.dart';
 import 'package:genesys_blog/views/desktop_view/user_post.dart';
@@ -139,7 +140,9 @@ class _DesktopViewPageState extends ConsumerState<DesktopViewHomePage> {
                   )),
               const Gap(15),
               GestureDetector(
-                  onTap: () {},
+                  onTap: () async{
+                     await UserSharedPref.clear();
+                  },
                   child: ListTile(
                     title: Text('Sign out',
                         style: GoogleFonts.poppins(

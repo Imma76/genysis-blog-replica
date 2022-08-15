@@ -6,7 +6,8 @@ class UserSharedPref {
       {required String email,
       required String firstName,
       required String lastName,
-      required String image,
+      required String image,   required String userId,
+      
       required String token}) async {
     SharedPreferences _sharedPref = await SharedPreferences.getInstance();
     await _sharedPref.setString('email', email);
@@ -14,6 +15,8 @@ class UserSharedPref {
     await _sharedPref.setString('lastName', lastName);
     await _sharedPref.setString('token', token);
      await _sharedPref.setString('image', image);
+       await _sharedPref.setString('userId', userId);
+     
     
   }
 
@@ -33,8 +36,11 @@ class UserSharedPref {
     String? firstName = _sharedPref.getString(
       'firstName',
     );
+     String? userId = _sharedPref.getString(
+      'userId',
+    );
     return UserModel(
-        email: email, token: token, firstName: firstName, lastName: lastName, photo:image);
+        email: email, token: token, firstName: firstName, lastName: lastName, photo:image, userId:userId );
   }
 
   static clear() async {

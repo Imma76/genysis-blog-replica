@@ -49,7 +49,8 @@ class UserService {
           firstName: _userModel.firstName.toString(),
           lastName: _userModel.lastName.toString(),
           token: decode['body']['token'],
-          image: _userModel.photo.toString());
+          image: _userModel.photo.toString(),
+          userId:_userModel.userId.toString());
       return decode;
     } catch (e) {
       return e.toString();
