@@ -5,13 +5,14 @@ import 'package:gap/gap.dart';
 import 'package:genesys_blog/constant.dart';
 import 'package:genesys_blog/controllers/all_providers/all_providers.dart';
 import 'package:genesys_blog/controllers/comment_controller.dart';
-import 'package:genesys_blog/controllers/home_page_controller.dart';
 import 'package:genesys_blog/controllers/post_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DesktopViewNewsPage extends ConsumerStatefulWidget {
-  String id;
-  DesktopViewNewsPage({Key? key, required this.id}) : super(key: key);
+  String articleId, editorsId;
+  DesktopViewNewsPage(
+      {Key? key, required this.articleId, required this.editorsId})
+      : super(key: key);
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
@@ -25,13 +26,15 @@ class _DesktopViewNewsPageState extends ConsumerState<DesktopViewNewsPage> {
     super.initState();
     PostController postController = ref.read(postProvider);
 
-    postController.loadNewsById(widget.id);
+    postController.loadNewsById(widget.articleId);
     CommentController commentController = ref.read(commentProvider);
+
+    commentController.getCommentBbyArticleId(widget.articleId);
   }
 
   @override
   Widget build(BuildContext context) {
-     PostController postController = ref.watch(postProvider);
+    PostController postController = ref.watch(postProvider);
     CommentController commentController = ref.watch(commentProvider);
     return Scaffold(
       body: SingleChildScrollView(
@@ -87,7 +90,8 @@ class _DesktopViewNewsPageState extends ConsumerState<DesktopViewNewsPage> {
                             height: 20,
                             width: 20,
                           ),
-                          const Text('15 comments'),
+                          Text(
+                              '${commentController.commentList!.length} comments'),
                         ],
                       ),
                       const Gap(24),
@@ -248,9 +252,18 @@ class _DesktopViewNewsPageState extends ConsumerState<DesktopViewNewsPage> {
                   padding: const EdgeInsets.only(left: 77, right: 77),
                   child: ElevatedButton(
                     onPressed: () {
-                      if (commentController.validate()) {}
+                      if (commentController.validate()) {
+                        commentController.postComment(
+                            articleId: widget.articleId,
+                            editorsId: widget.editorsId);
+                      }
                     },
-                    child: const Text('Post comment'),
+                    child: commentController.load
+                        ? Center(
+                            child:CircularProgressIndicator(
+                                color: white,
+                              ),)
+                        : const Text('Post comment'),
                     style: ElevatedButton.styleFrom(
                         primary: darkBlueColor, fixedSize: const Size(214, 72)),
                   ),

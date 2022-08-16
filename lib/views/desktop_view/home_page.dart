@@ -19,6 +19,7 @@ class HomePage extends ConsumerStatefulWidget {
 }
 
 class _HomePageState extends ConsumerState<HomePage> {
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -220,10 +221,12 @@ class _HomePageState extends ConsumerState<HomePage> {
                                                 MaterialPageRoute(
                                                     builder: (context) {
                                               return DesktopViewNewsPage(
-                                                  id: _homePageProvider
+                                                  articleId: _homePageProvider
                                                       .newsList![index]!
                                                       .articleId
-                                                      .toString());
+                                                      .toString(), editorsId:_homePageProvider
+                                                      .newsList![index]!
+                                                      .userId.toString() ,);
                                             }));
                                           },
                                           child: Padding(

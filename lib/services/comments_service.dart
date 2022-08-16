@@ -1,5 +1,8 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:genesys_blog/constant.dart';
 import 'package:genesys_blog/models/comment_model.dart';
+import 'package:genesys_blog/models/user_model.dart';
+import 'package:genesys_blog/utils/user_details.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -42,17 +45,23 @@ class CommentService {
         'comment': comments,
         'name': name,
       };
+      UserModel _userData = await UserSharedPref.getUser();
       var response = await http.post(
-        Uri.parse(
-          baseUrl + 'post/comments', 
-        ),body:body
-      );
+          Uri.parse(
+            baseUrl + 'post/comments',
+          ),
+          body: body,
+          headers: {'Authorization': 'Bearer ${_userData.token}'});
+
       var decode = jsonDecode(response.body);
-     // if (decode['message'] == 'comment posted successfully') {
-        return decode['message'];
-     // }
-    
-     
+      print(decode);
+      if (decode['message'] == 'auth failed') {
+        BotToast.showText(text: 'please sign in');
+      }
+      // if (decode['message'] == 'comment posted successfully') {
+      return decode['message'];
+      // }
+
     } catch (e) {
       print(e.toString());
     }
