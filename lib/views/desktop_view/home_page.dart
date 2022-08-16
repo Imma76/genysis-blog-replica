@@ -199,6 +199,8 @@ class _HomePageState extends ConsumerState<HomePage> {
                               children: [
                                 Expanded(
                                   child: NewsWidget(
+                                    articleId: _homePageProvider.newsList![0]!.articleId,
+                                    userId: _homePageProvider.newsList![0]!.userId,
                                     image:
                                         _homePageProvider.newsList![0]!.image,
                                     body: _homePageProvider.newsList![0]!.body,

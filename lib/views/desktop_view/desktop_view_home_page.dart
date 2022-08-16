@@ -89,7 +89,9 @@ class _DesktopViewPageState extends ConsumerState<DesktopViewHomePage> {
                         )),
                     const Gap(15),
                     GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                            _homePageProvider.changeIndex(3);
+                        },
                         child: ListTile(
                           title: Text('Dashboard',
                               style: GoogleFonts.poppins(

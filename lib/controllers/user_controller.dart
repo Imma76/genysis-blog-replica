@@ -75,7 +75,7 @@ class UserController extends ChangeNotifier {
     lastName = _userModel.lastName;
     email = _userModel.email;
     token = _userModel.token;
-    photo = _userModel.photo;
+    photo = _userModel.photo??'https://www.seekpng.com/png/detail/110-1100707_person-avatar-placeholder.png';
   }
 
   Future<bool> signUpUser(context) async {

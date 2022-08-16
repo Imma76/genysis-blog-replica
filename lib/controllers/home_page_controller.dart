@@ -4,6 +4,7 @@ import 'package:genesys_blog/services/post.dart';
 import 'package:genesys_blog/views/desktop_view/home_page.dart';
 import 'package:genesys_blog/views/desktop_view/user_drafts.dart';
 import 'package:genesys_blog/views/desktop_view/user_post.dart';
+import 'package:genesys_blog/views/desktop_view/users_dashboard.dart';
 
 class HomePageController extends ChangeNotifier {
   int _currentIndex = 0;
@@ -14,6 +15,7 @@ class HomePageController extends ChangeNotifier {
     const HomePage(),
     const UserPost(),
     const UserDrafts(),
+    const UserDashBoardDesktopView(),
   ];
 
   PostsModel? news;
