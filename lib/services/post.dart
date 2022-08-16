@@ -45,7 +45,7 @@ class PostService {
       var response = await http.get(Uri.parse(baseUrl + 'post/id/$id'));
       // print(response.body);
       var decode = jsonDecode(response.body);
-      //  print(decode);
+        print(decode);
       //for (int post = 0; post < decode['body'].length; post++) {
 
       PostsModel model = PostsModel.fromJson(decode['body']);

@@ -8,13 +8,13 @@ class CommentController extends ChangeNotifier {
   TextEditingController emailController = TextEditingController();
 
   TextEditingController firstNameController = TextEditingController();
-  TextEditingController commentController = TextEditingController();
+  TextEditingController userCommentController = TextEditingController();
 
   bool validate() {
     if (emailController.text.isEmpty ||
         firstNameController.text.isEmpty ||
-        commentController.text.isEmpty) {
-      BotToast.showText(text: "xxxx");
+        userCommentController.text.isEmpty) {
+      BotToast.showText(text: "Please Complete all fields");
       return false;
     }
     return true;

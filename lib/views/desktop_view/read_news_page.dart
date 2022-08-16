@@ -24,17 +24,18 @@ class _DesktopViewNewsPageState extends ConsumerState<DesktopViewNewsPage> {
     // TODO: implement initState
     super.initState();
     PostController postController = ref.read(postProvider);
-    CommentController commentController = ref.read(commentProvider);
+
     postController.loadNewsById(widget.id);
+    CommentController commentController = ref.read(commentProvider);
   }
 
   @override
   Widget build(BuildContext context) {
-    HomePageController _homePageProvider = ref.watch(homePageProvider);
-     CommentController commentController = ref.watch(commentProvider);
+     PostController postController = ref.watch(postProvider);
+    CommentController commentController = ref.watch(commentProvider);
     return Scaffold(
       body: SingleChildScrollView(
-        child: _homePageProvider.load
+        child: postController.load
             ? Center(
                 child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -69,7 +70,7 @@ class _DesktopViewNewsPageState extends ConsumerState<DesktopViewNewsPage> {
                 Padding(
                   padding: const EdgeInsets.only(left: 77, right: 77),
                   child: CachedNetworkImage(
-                      imageUrl: _homePageProvider.news!.image.toString(),
+                      imageUrl: postController.news!.image.toString(),
                       height: 400,
                       width: 800,
                       fit: BoxFit.fill),
@@ -95,7 +96,7 @@ class _DesktopViewNewsPageState extends ConsumerState<DesktopViewNewsPage> {
                           SizedBox(
                               height: 20,
                               width: 20,
-                              child: Text('${_homePageProvider.news!.views}')),
+                              child: Text('${postController.news!.views}')),
                           const Text('VIEWS'),
                         ],
                       ),
@@ -158,7 +159,7 @@ class _DesktopViewNewsPageState extends ConsumerState<DesktopViewNewsPage> {
                   child: SizedBox(
                       height: 379,
                       child: Text(
-                        _homePageProvider.news!.body.toString(),
+                        postController.news!.body.toString(),
                         style: GoogleFonts.poppins(
                             fontSize: 16, fontWeight: FontWeight.w500),
                       )),
@@ -195,7 +196,7 @@ class _DesktopViewNewsPageState extends ConsumerState<DesktopViewNewsPage> {
                 Padding(
                   padding: const EdgeInsets.only(left: 77, right: 77),
                   child: TextField(
-                    controller: commentController.commentController,
+                    controller: commentController.userCommentController,
                     maxLines: 20,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
@@ -215,7 +216,7 @@ class _DesktopViewNewsPageState extends ConsumerState<DesktopViewNewsPage> {
                 Padding(
                   padding: const EdgeInsets.only(left: 77, right: 77),
                   child: TextField(
-                     controller: commentController.firstNameController,
+                    controller: commentController.firstNameController,
                     maxLines: 2,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
@@ -235,7 +236,7 @@ class _DesktopViewNewsPageState extends ConsumerState<DesktopViewNewsPage> {
                 Padding(
                   padding: const EdgeInsets.only(left: 77, right: 77),
                   child: TextField(
-                     controller: commentController.emailController,
+                    controller: commentController.emailController,
                     maxLines: 2,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
@@ -246,7 +247,9 @@ class _DesktopViewNewsPageState extends ConsumerState<DesktopViewNewsPage> {
                 Padding(
                   padding: const EdgeInsets.only(left: 77, right: 77),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if (commentController.validate()) {}
+                    },
                     child: const Text('Post comment'),
                     style: ElevatedButton.styleFrom(
                         primary: darkBlueColor, fixedSize: const Size(214, 72)),

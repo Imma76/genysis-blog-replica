@@ -19,6 +19,7 @@ class PostController extends ChangeNotifier {
       // return newsList;
     } catch (e) {
       load = false;
+      print(e.toString());
     }
     notifyListeners();
   }
