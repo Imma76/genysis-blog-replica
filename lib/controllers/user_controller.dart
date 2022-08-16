@@ -99,6 +99,8 @@ class UserController extends ChangeNotifier {
           return const SignIn();
         }));
       }
+      message = uMessage;
+      notifyListeners();
 
       return true;
     } on SocketException {
@@ -108,7 +110,7 @@ class UserController extends ChangeNotifier {
       return false;
     } catch (e) {
       load = false;
-      message = e.toString();
+      //message = e.toString();
       notifyListeners();
       return false;
     }
@@ -138,7 +140,6 @@ class UserController extends ChangeNotifier {
           return const DesktopViewHomePage();
         }));
       }
-      
 
       return true;
     } on SocketException {

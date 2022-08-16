@@ -13,7 +13,7 @@ class DraftsService {
     List<DraftsModel> draftsList = [];
     try {
       var response = await http.get(Uri.parse(baseUrl + 'drafts'),
-          headers: {'Authorization': 'Bearer${_userModel.token}'});
+          headers: {'Authorization': 'Bearer ${_userModel.token}'});
       var decode = jsonDecode(response.body);
       print(decode);
 
