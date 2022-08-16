@@ -26,4 +26,35 @@ class CommentService {
       print(e.toString());
     }
   }
+
+  Future<String?> postComments(
+      {String? email,
+      String? name,
+      String? articleId,
+      String? editorsId,
+      String? comments}) async {
+    List<CommentModel?> commentList = [];
+    try {
+      Map body = {
+        'articleId': articleId,
+        'email': email,
+        'editorsId': editorsId,
+        'comment': comments,
+        'name': name,
+      };
+      var response = await http.post(
+        Uri.parse(
+          baseUrl + 'post/comments', 
+        ),body:body
+      );
+      var decode = jsonDecode(response.body);
+     // if (decode['message'] == 'comment posted successfully') {
+        return decode['message'];
+     // }
+    
+     
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 }

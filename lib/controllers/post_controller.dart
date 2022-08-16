@@ -7,12 +7,13 @@ class PostController extends ChangeNotifier {
   List<PostsModel?>? userPosts;
   bool load = false;
   PostsModel? news;
+  PostService postService = PostService();
 
   Future loadNewsById(String id) async {
     load = true;
-    PostService post = PostService();
+   
     try {
-      news = await post.getPostsById(id);
+      news = await postService.getPostsById(id);
       load = false;
       notifyListeners();
 
@@ -27,7 +28,7 @@ class PostController extends ChangeNotifier {
   Future getUserPosts() async {
     try {
       load = true;
-      PostService postService = PostService();
+      
       userPosts = await postService.getUserPosts();
       load = false;
       notifyListeners();

@@ -5,6 +5,7 @@ import 'package:genesys_blog/services/comments_service.dart';
 
 class CommentController extends ChangeNotifier {
   List<CommentModel?>? commentList;
+  CommentService commentService = CommentService();
   TextEditingController emailController = TextEditingController();
 
   TextEditingController firstNameController = TextEditingController();
@@ -20,11 +21,26 @@ class CommentController extends ChangeNotifier {
     return true;
   }
 
+  Future postComment({String? articleId, String? editorsId}) async {
+    load = true;
+    try {
+      String? message = await commentService.postComments(
+          email: emailController.text.trim(),
+          comments: userCommentController.text.trim(),
+          name: firstNameController.text.trim(),
+          articleId: articleId,
+          editorsId: editorsId);
+
+      BotToast.showText(text: message.toString());
+    } catch (e) {
+      BotToast.showText(text:e.toString());
+    }
+  }
+
   bool load = false;
   Future getCommentBbyArticleId(String articleId) async {
     try {
       load = true;
-      CommentService commentService = CommentService();
 
       commentList = await commentService.getArticleComments(articleId);
       load = false;
