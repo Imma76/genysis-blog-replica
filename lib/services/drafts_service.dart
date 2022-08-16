@@ -9,11 +9,14 @@ import 'dart:convert';
 class DraftsService {
   Future<List<DraftsModel?>?> getUserDrafts() async {
     UserModel _userModel = await UserSharedPref.getUser();
+    print('heyyyyy${_userModel.token}');
     List<DraftsModel> draftsList = [];
     try {
-      var response = await http.get(Uri.parse(baseUrl + 'post/drafts'),
-          headers: {'Authorization': 'Bearer ${_userModel.token}'});
+      var response = await http.get(Uri.parse(baseUrl + 'drafts'),
+          headers: {'Authorization': 'Bearer${_userModel.token}'});
       var decode = jsonDecode(response.body);
+      print(decode);
+
       if (decode['message'] == 'this user has no drafts') {
         return draftsList;
       }
@@ -28,5 +31,6 @@ class DraftsService {
     } catch (e) {
       print(e.toString());
     }
+    return null;
   }
 }

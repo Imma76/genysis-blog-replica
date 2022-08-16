@@ -42,7 +42,7 @@ class UserService {
       var decode = jsonDecode(response.body);
 
       UserModel _userModel = UserModel.fromJson(
-        decode['body']['data'],
+        decode['body']['data'],decode['body']['token']
       );
       await UserSharedPref.storeUser(
           email: _userModel.email.toString(),

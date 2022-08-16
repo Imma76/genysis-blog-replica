@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:genesys_blog/services/user.dart';
 import 'package:genesys_blog/utils/user_details.dart';

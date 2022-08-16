@@ -7,13 +7,21 @@ class UserModel {
   String? photo;
 
   UserModel(
-      {this.email, this.firstName, this.lastName, this.token, this.userId, this.photo});
+      {this.email,
+      this.firstName,
+      this.lastName,
+      this.token,
+      this.userId,
+      this.photo});
 
-  UserModel.fromJson(Map data, ) {
+  UserModel.fromJson(
+    Map data,token
+  ) {
     firstName = data['firstName'];
     lastName = data['lastName'];
     email = data['email'];
     photo = data['photo'];
     userId = data['_id'];
+    token = token;
   }
 }

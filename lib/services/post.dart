@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:genesys_blog/constant.dart';
 import 'package:genesys_blog/models/post_model.dart';
@@ -30,7 +31,10 @@ class PostService {
       }
 
       return newsModel;
-    } catch (e) {
+    } on SocketException{
+      print('no internet');
+      return null;
+    }catch (e) {
       print(e.toString());
     }
     return null;

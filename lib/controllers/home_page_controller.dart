@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:genesys_blog/models/post_model.dart';
 import 'package:genesys_blog/services/post.dart';
 import 'package:genesys_blog/views/desktop_view/home_page.dart';
@@ -11,11 +11,10 @@ class HomePageController extends ChangeNotifier {
   bool load = false;
   List<PostsModel?>? newsList;
   List<Widget> widgetList = [
-    HomePage(),
-    UserPost(),
-    UserDrafts(),
+    const HomePage(),
+    const UserPost(),
+    const UserDrafts(),
   ];
-
 
   PostsModel? news;
 

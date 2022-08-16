@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:genesys_blog/services/post.dart';
 
 import '../models/post_model.dart';
