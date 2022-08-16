@@ -125,7 +125,11 @@ class UserController extends ChangeNotifier {
       );
       load = false;
       notifyListeners();
-      print(resMessage);
+      print('ssss${resMessage}');
+      if (resMessage['body'] == 'user does not exist') {
+        message = 'Account does not exist';
+        notifyListeners();
+      }
       if (resMessage['body']['message'] == 'user logged in successfully') {
         emailController.clear();
         passwordController.clear();
@@ -134,6 +138,8 @@ class UserController extends ChangeNotifier {
           return const DesktopViewHomePage();
         }));
       }
+      
+
       return true;
     } on SocketException {
       message = 'no internet connection';
@@ -141,7 +147,7 @@ class UserController extends ChangeNotifier {
       notifyListeners();
       return false;
     } catch (e) {
-      message = e.toString();
+      //message = e.toString();
       load = false;
       notifyListeners();
 

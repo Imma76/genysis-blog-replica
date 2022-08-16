@@ -114,6 +114,9 @@ class _SignInState extends ConsumerState<SignIn> {
                             fontWeight: FontWeight.w400)),
                   ),
                   const Gap(24),
+                    _userController.message != null
+                        ? Text(_userController.message.toString(), style:GoogleFonts.poppins(color:Colors.red,))
+                        : const Text(''),
                   ElevatedButton(
                     onPressed: () async {
                       if (_userController.validateSignIn()) {
@@ -183,7 +186,7 @@ class _SignInState extends ConsumerState<SignIn> {
                 ],
               ),
               width: 614,
-              height: 566,
+              height: 600,
               decoration: BoxDecoration(
                   color: white, borderRadius: BorderRadius.circular(20)),
             )

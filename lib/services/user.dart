@@ -40,22 +40,21 @@ class UserService {
       var response =
           await http.post(Uri.parse(baseUrl + 'users/login'), body: body);
       var decode = jsonDecode(response.body);
-
-      UserModel _userModel = UserModel.fromJson(
-        decode['body']['data'],decode['body']['token']
-      );
+      if (decode['body'] == 'user does not exist') {
+        return decode;
+      }
+      UserModel _userModel =
+          UserModel.fromJson(decode['body']['data'], decode['body']['token']);
       await UserSharedPref.storeUser(
           email: _userModel.email.toString(),
           firstName: _userModel.firstName.toString(),
           lastName: _userModel.lastName.toString(),
           token: decode['body']['token'],
           image: _userModel.photo.toString(),
-          userId:_userModel.userId.toString());
+          userId: _userModel.userId.toString());
       return decode;
     } catch (e) {
       return e.toString();
     }
   }
-
-
 }
