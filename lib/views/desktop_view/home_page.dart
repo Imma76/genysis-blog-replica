@@ -19,13 +19,13 @@ class HomePage extends ConsumerStatefulWidget {
 }
 
 class _HomePageState extends ConsumerState<HomePage> {
-   void initState() {
+  void initState() {
     // TODO: implement initState
     super.initState();
     HomePageController _homePageProvider = ref.read(homePageProvider);
     _homePageProvider.loadNews();
-   
   }
+
   @override
   Widget build(BuildContext context) {
     HomePageController _homePageProvider = ref.watch(homePageProvider);
@@ -163,7 +163,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                 //         ),
                 //       ],
                 //     )),
-                 Gap(58.h),
+                Gap(58.h),
                 _homePageProvider.newsList!.isEmpty
                     ? Center(
                         child: Text(
@@ -242,6 +242,11 @@ class _HomePageState extends ConsumerState<HomePage> {
                                                               .image
                                                               .toString(),
                                                       width: 246,
+                                                      placeholder:
+                                                          (context, image) {
+                                                        return Image.asset(
+                                                            'assets/placeholder.png');
+                                                      },
                                                       height: 170,
                                                     ),
                                                     Gap(10.h),

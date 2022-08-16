@@ -29,7 +29,11 @@ class NewsWidget extends StatelessWidget {
         CachedNetworkImage(
           imageUrl: image.toString(),
           height: 365,
-          width: 523,
+          width: 523,  placeholder:
+                                                          (context, image) {
+                                                        return Image.asset(
+                                                            'assets/placeholder.png');
+                                                      },
           fit: BoxFit.fill,
         ),
         const Gap(24),
