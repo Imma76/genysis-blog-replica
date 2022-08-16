@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:genesys_blog/constant.dart';
 import 'package:genesys_blog/controllers/all_providers/all_providers.dart';
+import 'package:genesys_blog/controllers/comment_controller.dart';
 import 'package:genesys_blog/controllers/home_page_controller.dart';
 import 'package:genesys_blog/controllers/post_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,14 +23,15 @@ class _DesktopViewNewsPageState extends ConsumerState<DesktopViewNewsPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-   PostController postController = ref.read(postProvider);
-
+    PostController postController = ref.read(postProvider);
+    CommentController commentController = ref.read(commentProvider);
     postController.loadNewsById(widget.id);
   }
 
   @override
   Widget build(BuildContext context) {
     HomePageController _homePageProvider = ref.watch(homePageProvider);
+     CommentController commentController = ref.watch(commentProvider);
     return Scaffold(
       body: SingleChildScrollView(
         child: _homePageProvider.load
@@ -89,12 +91,11 @@ class _DesktopViewNewsPageState extends ConsumerState<DesktopViewNewsPage> {
                       ),
                       const Gap(24),
                       Column(
-                        children:  [
+                        children: [
                           SizedBox(
                               height: 20,
                               width: 20,
-                              child: Text(
-                                  '${_homePageProvider.news!.views}')),
+                              child: Text('${_homePageProvider.news!.views}')),
                           const Text('VIEWS'),
                         ],
                       ),
@@ -194,6 +195,7 @@ class _DesktopViewNewsPageState extends ConsumerState<DesktopViewNewsPage> {
                 Padding(
                   padding: const EdgeInsets.only(left: 77, right: 77),
                   child: TextField(
+                    controller: commentController.commentController,
                     maxLines: 20,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
@@ -213,6 +215,7 @@ class _DesktopViewNewsPageState extends ConsumerState<DesktopViewNewsPage> {
                 Padding(
                   padding: const EdgeInsets.only(left: 77, right: 77),
                   child: TextField(
+                     controller: commentController.firstNameController,
                     maxLines: 2,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
@@ -232,6 +235,7 @@ class _DesktopViewNewsPageState extends ConsumerState<DesktopViewNewsPage> {
                 Padding(
                   padding: const EdgeInsets.only(left: 77, right: 77),
                   child: TextField(
+                     controller: commentController.emailController,
                     maxLines: 2,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
