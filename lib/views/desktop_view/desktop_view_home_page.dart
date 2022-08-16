@@ -1,3 +1,4 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -75,9 +76,9 @@ class _DesktopViewPageState extends ConsumerState<DesktopViewHomePage> {
                       ),
                     ),
                     const Gap(20),
-                     GestureDetector(
+                    GestureDetector(
                         onTap: () {
-                           _homePageProvider.changeIndex(0);
+                          _homePageProvider.changeIndex(0);
                         },
                         child: ListTile(
                           title: Text('Home',
@@ -119,7 +120,7 @@ class _DesktopViewPageState extends ConsumerState<DesktopViewHomePage> {
                           //     MaterialPageRoute(builder: (context) {
                           //   return const UserDrafts();
                           // }));
-                            _homePageProvider.changeIndex(2);
+                          _homePageProvider.changeIndex(2);
                         },
                         child: ListTile(
                           title: Text('Drafts',
@@ -130,7 +131,9 @@ class _DesktopViewPageState extends ConsumerState<DesktopViewHomePage> {
                         )),
                     const Gap(15),
                     GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          BotToast.showText(text: "xxxx");
+                        },
                         child: ListTile(
                           title: Text('Profile settings',
                               style: GoogleFonts.poppins(
@@ -180,9 +183,8 @@ class _DesktopViewPageState extends ConsumerState<DesktopViewHomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                  
                     Visibility(
-                      visible:_homePageProvider.currentIndex ==0,
+                      visible: _homePageProvider.currentIndex == 0,
                       child: GestureDetector(
                         onTap: () {
                           _homePageProvider.loadNews(category: 'news');
@@ -192,8 +194,8 @@ class _DesktopViewPageState extends ConsumerState<DesktopViewHomePage> {
                                 fontSize: 20.sp, color: white)),
                       ),
                     ),
-                   Visibility(
-                      visible:_homePageProvider.currentIndex ==0,
+                    Visibility(
+                      visible: _homePageProvider.currentIndex == 0,
                       child: GestureDetector(
                         onTap: () async {
                           _homePageProvider.loadNews(category: 'politics');
@@ -205,7 +207,7 @@ class _DesktopViewPageState extends ConsumerState<DesktopViewHomePage> {
                       ),
                     ),
                     Visibility(
-                      visible:_homePageProvider.currentIndex ==0,
+                      visible: _homePageProvider.currentIndex == 0,
                       child: GestureDetector(
                         onTap: () {
                           _homePageProvider.loadNews(category: 'entertainment');
@@ -216,7 +218,7 @@ class _DesktopViewPageState extends ConsumerState<DesktopViewHomePage> {
                       ),
                     ),
                     Visibility(
-                      visible:_homePageProvider.currentIndex ==0,
+                      visible: _homePageProvider.currentIndex == 0,
                       child: GestureDetector(
                         onTap: () {
                           _homePageProvider.loadNews(category: 'technology');
@@ -226,8 +228,8 @@ class _DesktopViewPageState extends ConsumerState<DesktopViewHomePage> {
                                 fontSize: 20.sp, color: white)),
                       ),
                     ),
-                     Visibility(
-                      visible:_homePageProvider.currentIndex ==0,
+                    Visibility(
+                      visible: _homePageProvider.currentIndex == 0,
                       child: GestureDetector(
                         onTap: () {
                           _homePageProvider.loadNews(category: 'sports');
@@ -237,8 +239,8 @@ class _DesktopViewPageState extends ConsumerState<DesktopViewHomePage> {
                                 fontSize: 20.sp, color: white)),
                       ),
                     ),
-                     Visibility(
-                      visible:_homePageProvider.currentIndex ==0,
+                    Visibility(
+                      visible: _homePageProvider.currentIndex == 0,
                       child: GestureDetector(
                         onTap: () {
                           _homePageProvider.loadNews(category: 'education');

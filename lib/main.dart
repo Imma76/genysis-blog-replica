@@ -1,3 +1,4 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -41,6 +42,8 @@ class _MyAppState extends ConsumerState<MyApp> {
   Widget build(BuildContext context) {
     UserController _userController = ref.watch(userProvider);
     return MaterialApp(
+      builder: BotToastInit(), //1. call BotToastInit
+      navigatorObservers: [BotToastNavigatorObserver()],
         title: 'Flutter Demo',
         theme: ThemeData(
           // This is the theme of your application.

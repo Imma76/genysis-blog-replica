@@ -54,11 +54,11 @@ class _UserDraftsState extends ConsumerState<UserDrafts> {
             ))
           : Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Gap(20),
-              const DashboardMetricsWidget(
+               DashboardMetricsWidget(
                 width: 391,
                 boxType: 'Drafts',
                 imagePath: 'assets/post.png',
-                mertricNumber: '10',
+                mertricNumber:   _draftProvider.draftsList!.length.toString(),
               ),
               Gap(70),
               Text(
