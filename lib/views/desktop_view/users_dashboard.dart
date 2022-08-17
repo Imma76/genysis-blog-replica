@@ -15,6 +15,12 @@ class UserDashBoardDesktopView extends ConsumerStatefulWidget {
 
 class _UserDashBoardDesktopViewState
     extends ConsumerState<UserDashBoardDesktopView> {
+      @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    
+  }
   @override
   Widget build(BuildContext context) {
     return  SingleChildScrollView(

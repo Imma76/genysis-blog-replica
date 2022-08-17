@@ -8,6 +8,8 @@ import 'package:genesys_blog/models/user_model.dart';
 import 'package:genesys_blog/utils/user_details.dart';
 import 'package:http/http.dart' as http;
 
+import '../models/user_details_model.dart';
+
 class PostService {
   // Future<NewsModel> postArticle()async{
   //   try{
@@ -31,10 +33,10 @@ class PostService {
       }
 
       return newsModel;
-    } on SocketException{
+    } on SocketException {
       print('no internet');
       return null;
-    }catch (e) {
+    } catch (e) {
       print(e.toString());
     }
     return null;
@@ -45,7 +47,7 @@ class PostService {
       var response = await http.get(Uri.parse(baseUrl + 'post/id/$id'));
       // print(response.body);
       var decode = jsonDecode(response.body);
-        print(decode);
+      print(decode);
       //for (int post = 0; post < decode['body'].length; post++) {
 
       PostsModel model = PostsModel.fromJson(decode['body']);
@@ -66,11 +68,8 @@ class PostService {
       UserModel _userData = await UserSharedPref.getUser();
       print(_userData.userId);
       var response = await http.get(
-        Uri.parse(baseUrl + 'post/userpost/${_userData.userId}'),
-        headers: {
-          'Authorization':'Bearer ${_userData.token}'
-        }
-      );
+          Uri.parse(baseUrl + 'post/userpost/${_userData.userId}'),
+          headers: {'Authorization': 'Bearer ${_userData.token}'});
       var decode = jsonDecode(response.body);
       if (decode['body'] == 'no post found') {
         return postList;
@@ -83,6 +82,33 @@ class PostService {
         postList.add(_posts);
       }
       return postList;
+    } catch (e) {
+      print(e.toString());
+    }
+    return null;
+  }
+
+  Future<UserDetails?> getUserDetails() async {
+   // List<PostsModel?> postList = [];
+    try {
+      UserModel _userData = await UserSharedPref.getUser();
+      print(_userData.userId);
+      var response = await http.get(
+        Uri.parse(baseUrl + 'users/${_userData.userId}'),
+        // headers: {
+        //   'Authorization':'Bearer ${_userData.token}'
+        // }
+      );
+      var decode = jsonDecode(response.body);
+      // if (decode['body'] == 'no post found') {
+      //   return postList;
+      // }
+      //for (int post = 0; post < decode['body']['userPost'].length; post++) {
+        UserDetails userDetails = UserDetails.fromJson(decode['body']);
+
+        
+      //}
+      return userDetails;
     } catch (e) {
       print(e.toString());
     }

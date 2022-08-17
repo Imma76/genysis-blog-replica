@@ -212,7 +212,8 @@ class _HomePageState extends ConsumerState<HomePage> {
                                   height: 700,
                                   width: 600,
                                   child: ListView.builder(
-                                      itemCount: 3,
+                                      itemCount: _homePageProvider
+                                                      .newsList!.length,
                                       shrinkWrap: true,
 
                                       /// padding: EdgeInsets.all(20),
@@ -265,7 +266,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                                                             'June 24, 2022'),
                                                         TitleWidget(
                                                           width: 333.w,
-                                                          fontSize: 14,
+                                                          fontSize: 12,
                                                           title:
                                                               _homePageProvider
                                                                   .newsList![
