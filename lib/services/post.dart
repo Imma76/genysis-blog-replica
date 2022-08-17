@@ -66,7 +66,7 @@ class PostService {
     List<PostsModel?> postList = [];
     try {
       UserModel _userData = await UserSharedPref.getUser();
-      print(_userData.userId);
+      //print(_userData.userId);
       var response = await http.get(
           Uri.parse(baseUrl + 'post/userpost/${_userData.userId}'),
           headers: {'Authorization': 'Bearer ${_userData.token}'});
