@@ -46,6 +46,7 @@ class PostController extends ChangeNotifier {
       load = true;
 
       userDetails = await postService.getUserDetails();
+      print(userDetails);
       load = false;
       notifyListeners();
     } catch (e) {

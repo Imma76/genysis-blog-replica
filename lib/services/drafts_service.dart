@@ -15,7 +15,7 @@ class DraftsService {
       var response = await http.get(Uri.parse(baseUrl + 'drafts'),
           headers: {'Authorization': 'Bearer ${_userModel.token}'});
       var decode = jsonDecode(response.body);
-      print(decode);
+
 
       if (decode['message'] == 'this user has no drafts') {
         return draftsList;

@@ -89,7 +89,7 @@ class PostService {
   }
 
   Future<UserDetails?> getUserDetails() async {
-   // List<PostsModel?> postList = [];
+    List<PostsModel?> postList = [];
     try {
       UserModel _userData = await UserSharedPref.getUser();
       print(_userData.userId);
@@ -100,13 +100,18 @@ class PostService {
         // }
       );
       var decode = jsonDecode(response.body);
+    //  print(decode);
       // if (decode['body'] == 'no post found') {
       //   return postList;
       // }
       //for (int post = 0; post < decode['body']['userPost'].length; post++) {
-        UserDetails userDetails = UserDetails.fromJson(decode['body']);
+        for (int i = 0; i < decode['body']['userPost'].length; i++) {
+      PostsModel _postList = PostsModel.fromJson(decode['body']['userPost'][i]);
+      postList.add(_postList);
+     
+    }
+      UserDetails userDetails = UserDetails.fromJson(decode['body'], postList);
 
-        
       //}
       return userDetails;
     } catch (e) {
