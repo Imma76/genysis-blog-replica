@@ -33,7 +33,15 @@ class UserController extends ChangeNotifier {
   String? lastName;
   String? email;
   String? photo;
+
   //S? userModel;
+  Future signOut() async {
+    firstName = null;
+     photo =  'https://www.seekpng.com/png/detail/110-1100707_person-avatar-placeholder.png';
+    await UserSharedPref.clear();
+    notifyListeners();
+  }
+
   bool validateSignUp() {
     if (emailController.text.isEmpty ||
         passwordController.text.isEmpty ||
@@ -75,7 +83,8 @@ class UserController extends ChangeNotifier {
     lastName = _userModel.lastName;
     email = _userModel.email;
     token = _userModel.token;
-    photo = _userModel.photo??'https://www.seekpng.com/png/detail/110-1100707_person-avatar-placeholder.png';
+    photo = _userModel.photo ??
+        'https://www.seekpng.com/png/detail/110-1100707_person-avatar-placeholder.png';
   }
 
   Future<bool> signUpUser(context) async {
@@ -128,10 +137,11 @@ class UserController extends ChangeNotifier {
       load = false;
       notifyListeners();
       print('ssss${resMessage}');
-      if (resMessage['body'] == 'user does not exist') {
-        message = 'Account does not exist';
+      if (resMessage['success'] == false) {
+        message = resMessage['message'];
         notifyListeners();
       }
+
       if (resMessage['body']['message'] == 'user logged in successfully') {
         emailController.clear();
         passwordController.clear();

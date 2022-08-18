@@ -40,7 +40,8 @@ class UserService {
       var response =
           await http.post(Uri.parse(baseUrl + 'users/login'), body: body);
       var decode = jsonDecode(response.body);
-      if (decode['body'] == 'user does not exist') {
+      print(decode);
+      if (decode['message'] == 'user does not exist' || decode['message'] ==  'email or password is invalid') {
         return decode;
       }
       UserModel _userModel =

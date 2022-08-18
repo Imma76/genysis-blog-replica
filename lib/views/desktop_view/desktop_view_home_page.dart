@@ -90,7 +90,7 @@ class _DesktopViewPageState extends ConsumerState<DesktopViewHomePage> {
                     const Gap(15),
                     GestureDetector(
                         onTap: () {
-                            _homePageProvider.changeIndex(3);
+                          _homePageProvider.changeIndex(3);
                         },
                         child: ListTile(
                           title: Text('Dashboard',
@@ -146,7 +146,8 @@ class _DesktopViewPageState extends ConsumerState<DesktopViewHomePage> {
                     const Gap(15),
                     GestureDetector(
                         onTap: () async {
-                          await UserSharedPref.clear();
+                          await _userController.signOut();
+                          Navigator.pop(context);
                         },
                         child: ListTile(
                           title: Text('Sign out',
@@ -253,42 +254,41 @@ class _DesktopViewPageState extends ConsumerState<DesktopViewHomePage> {
                       ),
                     ),
                     //Spacer(),
-                    Visibility(
-                      visible: _userController.firstName != null,
-
-                      //   waitDuration: const Duration(seconds: 1),
-                      // // showDuration: const Duration(seconds: 2),
-                      // padding: const EdgeInsets.all(5),
-                      // height: 35,
-                      // textStyle: const TextStyle(
-                      //     fontSize: 15,
-                      //     color: Colors.white,
-                      //     fontWeight: FontWeight.normal),
-                      // decoration: BoxDecoration(
-                      //     borderRadius: BorderRadius.circular(10),
-                      //     color: Colors.green),
-                      // message:"kkk",
-                      child: GestureDetector(
-                        onTap: () {
-                          _key.currentState!.openEndDrawer();
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 20, bottom: 5),
-                          child: Row(
-                            children: [
-                              CircleAvatar(
-                                  child: CachedNetworkImage(
-                                      imageUrl:
-                                          _userController.photo.toString())),
-                              const Gap(10),
-                              Text(_userController.firstName.toString(),
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w400,
-                                      color: white)),
-                            ],
-                          ),
-                        ),
+                    GestureDetector(
+                      onTap: () {
+                        _key.currentState!.openEndDrawer();
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 20, bottom: 5),
+                        child: _userController.firstName != null
+                            ? Row(
+                                children: [
+                                  CircleAvatar(
+                                      child: CachedNetworkImage(
+                                          imageUrl: _userController.photo
+                                              .toString())),
+                                  const Gap(10),
+                                  Text(_userController.firstName.toString(),
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w400,
+                                          color: white)),
+                                ],
+                              )
+                            : Row(
+                                children: [
+                                  CircleAvatar(
+                                      child: CachedNetworkImage(
+                                          imageUrl: _userController.photo
+                                              .toString())),
+                                  const Gap(10),
+                                  Text('SIGN IN',
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w400,
+                                          color: white)),
+                                ],
+                              ),
                       ),
                     ),
                   ],
