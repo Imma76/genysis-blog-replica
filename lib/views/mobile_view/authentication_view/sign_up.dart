@@ -166,6 +166,10 @@ class _SignInState extends ConsumerState<MobileSignUp> {
                               ))),
                     ),
                   ),
+                   const Gap(24),
+                    _userController.message != null
+                        ? Text(_userController.message.toString(), style:GoogleFonts.poppins(color:Colors.red,))
+                        : const Text(''),
                   Gap(20.h),
                   ElevatedButton(
                     onPressed: () async {
