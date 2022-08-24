@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:genesys_blog/controllers/user_controller.dart';
 import 'package:genesys_blog/views/desktop_view/authentication_view/sign_up.dart';
 import 'package:genesys_blog/views/desktop_view/desktop_view_home_page.dart';
+import 'package:genesys_blog/views/mobile_view/authentication_view/sign_in.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import 'controllers/all_providers/all_providers.dart';
@@ -42,8 +43,8 @@ class _MyAppState extends ConsumerState<MyApp> {
   Widget build(BuildContext context) {
     UserController _userController = ref.watch(userProvider);
     return MaterialApp(
-      builder: BotToastInit(), //1. call BotToastInit
-      navigatorObservers: [BotToastNavigatorObserver()],
+        builder: BotToastInit(), //1. call BotToastInit
+        navigatorObservers: [BotToastNavigatorObserver()],
         title: 'Flutter Demo',
         theme: ThemeData(
           // This is the theme of your application.
@@ -68,9 +69,7 @@ class _MyAppState extends ConsumerState<MyApp> {
           mobile: ScreenUtilInit(
               designSize: const Size(414, 1024),
               builder: (context, c) {
-                return _userController.email != null
-                    ? const DesktopViewHomePage()
-                    : const SignUp();
+                return MobileSignIn();
               }),
         ));
   }
