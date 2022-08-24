@@ -13,6 +13,8 @@ import 'package:genesys_blog/views/desktop_view/user_drafts.dart';
 import 'package:genesys_blog/views/desktop_view/user_post.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'authentication_view/sign_in.dart';
+
 class DesktopViewHomePage extends ConsumerStatefulWidget {
   const DesktopViewHomePage({Key? key}) : super(key: key);
 
@@ -256,7 +258,15 @@ class _DesktopViewPageState extends ConsumerState<DesktopViewHomePage> {
                     //Spacer(),
                     GestureDetector(
                       onTap: () {
-                        _key.currentState!.openEndDrawer();
+                        if (_userController.firstName != null) {
+                          _key.currentState!.openEndDrawer();
+                        }else{
+                           Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return SignIn();
+                        }));
+                        }
+                       
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(right: 20, bottom: 5),

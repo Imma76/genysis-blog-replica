@@ -65,13 +65,13 @@ class _MyAppState extends ConsumerState<MyApp> {
                     ? const DesktopViewHomePage()
                     : const SignUp();
               }),
-          mobile: Scaffold(
-            body: Container(
-              child: Column(
-                children: const [Text('Genesys Blog')],
-              ),
-            ),
-          ),
+          mobile: ScreenUtilInit(
+              designSize: const Size(414, 1024),
+              builder: (context, c) {
+                return _userController.email != null
+                    ? const DesktopViewHomePage()
+                    : const SignUp();
+              }),
         ));
   }
 }
