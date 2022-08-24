@@ -19,7 +19,7 @@ class _SignInState extends ConsumerState<MobileSignIn> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding:  EdgeInsets.only(left:24.w),
+        padding:  EdgeInsets.only(left:24.w, right:22.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -49,9 +49,55 @@ class _SignInState extends ConsumerState<MobileSignIn> {
                   fontWeight: FontWeight.w400,
                   color: black,
                 ),
-              ),
+              ),Gap(10.h),
                SizedBox(
-                    height: 50,
+                    height: 46,
+                    child: TextField(
+                     // controller: _userController.emailController,
+                      //  maxLines: 0,
+                      decoration: InputDecoration(
+                   //       hintText: 'e.g johdoe@gmail.com',
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                color: black,
+                              ))),
+                    ),
+                  ),
+                  Gap(20.h),
+                    Text(
+                'Last name',
+                style: GoogleFonts.poppins(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w400,
+                  color: black,
+                ),
+              ),Gap(10.h),
+               SizedBox(
+                    height: 46,
+                    child: TextField(
+                     // controller: _userController.emailController,
+                      //  maxLines: 0,
+                      decoration: InputDecoration(
+                    //      hintText: 'e.g johdoe@gmail.com',
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                color: black,
+                              ))),
+                    ),
+                  ),
+                  Gap(20.h),
+                    Text(
+                'Email Address',
+                style: GoogleFonts.poppins(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w400,
+                  color: black,
+                ),
+              ),Gap(10.h),
+               SizedBox(
+                    height: 46,
                     child: TextField(
                      // controller: _userController.emailController,
                       //  maxLines: 0,
@@ -63,6 +109,63 @@ class _SignInState extends ConsumerState<MobileSignIn> {
                                 color: black,
                               ))),
                     ),
+                  ),
+                  Gap(20.h),
+                    Text(
+                'Password',
+                style: GoogleFonts.poppins(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w400,
+                  color: black,
+                ),
+              ),Gap(10.h),
+               SizedBox(
+                    height: 46,
+                    child: TextField(
+                     // controller: _userController.emailController,
+                      //  maxLines: 0,
+                      decoration: InputDecoration(
+                         // hintText: 'e.g johdoe@gmail.com',
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                color: black,
+                              ))),
+                    ),
+                  ),
+                  Gap(20.h),
+                    Text(
+                'Confirm Password',
+                style: GoogleFonts.poppins(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w400,
+                  color: black,
+                ),
+              ),Gap(10.h),
+               SizedBox(
+                    height: 46,
+                    child: TextField(
+                     // controller: _userController.emailController,
+                      //  maxLines: 0,
+                      decoration: InputDecoration(
+                   //       hintText: 'e.g johdoe@gmail.com',
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                color: black,
+                              ))),
+                    ),
+                  ),
+                  Gap(20.h),
+                  ElevatedButton(
+                    onPressed: () async {
+                      // if (_userController.validateSignIn()) {
+                      //   await _userController.loginUser(context);
+                      // }
+                    },
+                    child: const Text('Sign In'),
+                    style: ElevatedButton.styleFrom(
+                        primary: darkBlueColor, fixedSize: const Size(480, 52)),
                   ),
           ],
         ),
