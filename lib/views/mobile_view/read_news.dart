@@ -69,7 +69,7 @@ class _MobileViewNewsState extends ConsumerState<MobileViewNews> {
                     )),
                 const Gap(45),
                 Padding(
-                  padding: const EdgeInsets.only(left: 77, right: 77),
+                  padding: const EdgeInsets.only(left: 24, right: 24),
                   child: CachedNetworkImage(
                       imageUrl: postController.news!.image.toString(),
                       height: 400,
@@ -78,7 +78,7 @@ class _MobileViewNewsState extends ConsumerState<MobileViewNews> {
                 ),
                 const Gap(66),
                 Padding(
-                  padding: const EdgeInsets.only(left: 77, right: 77),
+                 padding: const EdgeInsets.only(left: 24, right: 24),
                   child: Row(
                     children: [
                       Column(
@@ -103,61 +103,13 @@ class _MobileViewNewsState extends ConsumerState<MobileViewNews> {
                         ],
                       ),
                       const Gap(24),
-                      Container(
-                        width: 257,
-                        height: 47,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              'assets/facebook.png',
-                              height: 24,
-                              width: 24,
-                            ),
-                            const Gap(10),
-                            Text('Share on facebook',
-                                style: GoogleFonts.poppins(
-                                    fontSize: 16,
-                                    color: white,
-                                    fontWeight: FontWeight.w500))
-                          ],
-                        ),
-                        decoration: BoxDecoration(
-                            color: darkBlueColor,
-                            borderRadius: BorderRadius.circular(5)),
-                      ),
-                      const Gap(24),
-                      Container(
-                        width: 257,
-                        height: 47,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              'assets/twitter.png',
-                              height: 24,
-                              width: 24,
-                            ),
-                            const Gap(10),
-                            Text('Share on twitter',
-                                style: GoogleFonts.poppins(
-                                    fontSize: 16,
-                                    color: white,
-                                    fontWeight: FontWeight.w500))
-                          ],
-                        ),
-                        decoration: BoxDecoration(
-                            color: lightBlue,
-                            borderRadius: BorderRadius.circular(5)),
-                      )
+                      
                     ],
                   ),
                 ),
                 const Gap(25),
                 Padding(
-                  padding: const EdgeInsets.only(left: 77, right: 77),
+                padding: const EdgeInsets.only(left: 24, right: 24),
                   child: SizedBox(
                       height: 379,
                       child: Text(
@@ -168,7 +120,7 @@ class _MobileViewNewsState extends ConsumerState<MobileViewNews> {
                 ),
                 const Gap(73),
                 Padding(
-                  padding: const EdgeInsets.only(left: 77, right: 77),
+                 padding: const EdgeInsets.only(left: 24, right: 24),
                   child: Text('Leave a Reply',
                       style: GoogleFonts.poppins(
                           fontSize: 24,
@@ -177,7 +129,7 @@ class _MobileViewNewsState extends ConsumerState<MobileViewNews> {
                 ),
                 const Gap(17),
                 Padding(
-                  padding: const EdgeInsets.only(left: 77, right: 77),
+                  padding: const EdgeInsets.only(left: 24, right: 24),
                   child: Text(
                       'Your email address will not be published. Required fields are marked *',
                       style: GoogleFonts.poppins(
@@ -187,7 +139,7 @@ class _MobileViewNewsState extends ConsumerState<MobileViewNews> {
                 ),
                 const Gap(33),
                 Padding(
-                  padding: const EdgeInsets.only(left: 77, right: 77),
+                  padding: const EdgeInsets.only(left: 24, right: 24),
                   child: Text('Comment',
                       style: GoogleFonts.poppins(
                           fontSize: 20,
@@ -196,7 +148,7 @@ class _MobileViewNewsState extends ConsumerState<MobileViewNews> {
                 ),
                 const Gap(15),
                 Padding(
-                  padding: const EdgeInsets.only(left: 77, right: 77),
+                 padding: const EdgeInsets.only(left: 24, right: 24),
                   child: TextField(
                     controller: commentController.userCommentController,
                     maxLines: 20,
@@ -207,7 +159,7 @@ class _MobileViewNewsState extends ConsumerState<MobileViewNews> {
                 ),
                 const Gap(15),
                 Padding(
-                  padding: const EdgeInsets.only(left: 77, right: 77),
+                  padding: const EdgeInsets.only(left: 24, right: 24),
                   child: Text('Name',
                       style: GoogleFonts.poppins(
                           fontSize: 20,
@@ -216,7 +168,7 @@ class _MobileViewNewsState extends ConsumerState<MobileViewNews> {
                 ),
                 const Gap(15),
                 Padding(
-                  padding: const EdgeInsets.only(left: 77, right: 77),
+                  padding: const EdgeInsets.only(left: 24, right: 24),
                   child: TextField(
                     controller: commentController.firstNameController,
                     maxLines: 2,
@@ -227,7 +179,7 @@ class _MobileViewNewsState extends ConsumerState<MobileViewNews> {
                 ),
                 const Gap(15),
                 Padding(
-                  padding: const EdgeInsets.only(left: 77, right: 77),
+                  padding: const EdgeInsets.only(left: 24, right: 24),
                   child: Text('Email',
                       style: GoogleFonts.poppins(
                           fontSize: 20,
@@ -236,7 +188,7 @@ class _MobileViewNewsState extends ConsumerState<MobileViewNews> {
                 ),
                 const Gap(15),
                 Padding(
-                  padding: const EdgeInsets.only(left: 77, right: 77),
+                 padding: const EdgeInsets.only(left: 24, right: 24),
                   child: TextField(
                     controller: commentController.emailController,
                     maxLines: 2,
@@ -247,7 +199,7 @@ class _MobileViewNewsState extends ConsumerState<MobileViewNews> {
                 ),
                 const Gap(31),
                 Padding(
-                  padding: const EdgeInsets.only(left: 77, right: 77),
+                  padding: const EdgeInsets.only(left: 24, right: 24),
                   child: ElevatedButton(
                     onPressed: () {
                       if (commentController.validate()) {
@@ -263,7 +215,7 @@ class _MobileViewNewsState extends ConsumerState<MobileViewNews> {
                               ),)
                         : const Text('Post comment'),
                     style: ElevatedButton.styleFrom(
-                        primary: darkBlueColor, fixedSize: const Size(214, 72)),
+                        primary: darkBlueColor, fixedSize: const Size(137, 52)),
                   ),
                 ),
                 const Gap(100),

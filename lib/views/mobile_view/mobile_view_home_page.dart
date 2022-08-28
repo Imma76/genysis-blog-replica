@@ -6,6 +6,7 @@ import 'package:gap/gap.dart';
 import 'package:genesys_blog/constant.dart';
 import 'package:genesys_blog/controllers/home_page_controller.dart';
 import 'package:genesys_blog/controllers/user_controller.dart';
+import 'package:genesys_blog/views/mobile_view/read_news.dart';
 import 'package:genesys_blog/widgets/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -97,40 +98,55 @@ class _MobileViewHomePageState extends ConsumerState<MobileViewHomePage> {
                       },
                       itemCount: _homePageProvider.newsList!.length,
                       itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: SizedBox(
-                            height: 158,
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      const Text('June 24, 2022'),
-                                      Gap(8.h),
-                                      TitleWidget(
-                                        width: 530,
-                                        fontSize: 12.sp,
-                                        title: _homePageProvider
-                                            .newsList![index]!.title!
-                                            .substring(40),
-                                      ),
-                                      Gap(8.h),
-                                      Text('Read More',
-                                          style: TextStyle(color: lightBlue)),
-                                    ],
+                        return GestureDetector(
+                          onTap: (){
+                             Navigator.push(context,
+                                                MaterialPageRoute(
+                                                    builder: (context) {
+                                              return MobileViewNews(
+                                                  articleId: _homePageProvider
+                                                      .newsList![index]!
+                                                      .articleId
+                                                      .toString(), editorsId:_homePageProvider
+                                                      .newsList![index]!
+                                                      .userId.toString() ,);
+                                            }));
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: SizedBox(
+                              height: 158,
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Text('June 24, 2022'),
+                                        Gap(8.h),
+                                        TitleWidget(
+                                          width: 530,
+                                          fontSize: 12.sp,
+                                          title: _homePageProvider
+                                              .newsList![index]!.title!
+                                              .substring(40),
+                                        ),
+                                        Gap(8.h),
+                                        Text('Read More',
+                                            style: TextStyle(color: lightBlue)),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                CachedNetworkImage(
-                                  imageUrl: _homePageProvider
-                                      .newsList![index]!.image
-                                      .toString(),
-                                  height: 100.h,
-                                  width: 166.w,
-                                )
-                              ],
+                                  CachedNetworkImage(
+                                    imageUrl: _homePageProvider
+                                        .newsList![index]!.image
+                                        .toString(),
+                                    height: 100.h,
+                                    width: 166.w,
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         );
