@@ -120,7 +120,7 @@ class _SignInState extends ConsumerState<SignIn> {
                   ElevatedButton(
                     onPressed: () async {
                       if (_userController.validateSignIn()) {
-                        await _userController.loginUser(context);
+                        await _userController.loginUser(context, false);
                       }
                     },
                     child: _userController.load

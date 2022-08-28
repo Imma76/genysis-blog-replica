@@ -5,6 +5,7 @@ import 'package:genesys_blog/services/user.dart';
 import 'package:genesys_blog/utils/user_details.dart';
 import 'package:genesys_blog/views/desktop_view/authentication_view/sign_in.dart';
 import 'package:genesys_blog/views/desktop_view/desktop_view_home_page.dart';
+import 'package:genesys_blog/views/mobile_view/mobile_view_home_page.dart';
 
 import '../models/user_model.dart';
 
@@ -125,7 +126,7 @@ class UserController extends ChangeNotifier {
     }
   }
 
-  Future<bool> loginUser(context) async {
+  Future<bool> loginUser(context, bool mobile ) async {
     UserService _userService = UserService();
     try {
       load = true;
@@ -147,7 +148,7 @@ class UserController extends ChangeNotifier {
         passwordController.clear();
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) {
-          return const DesktopViewHomePage();
+          return  mobile? MobileViewHomePage(): DesktopViewHomePage();
         }));
       }
 
