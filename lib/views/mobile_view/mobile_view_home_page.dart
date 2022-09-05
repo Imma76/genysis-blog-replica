@@ -106,7 +106,7 @@ class _MobileViewHomePageState extends ConsumerState<MobileViewHomePage> {
                     const Gap(20),
                     GestureDetector(
                         onTap: () {
-                          _homePageProvider.changeIndex(0);
+                       ///   _homePageProvider.changeIndex(0);
                         },
                         child: ListTile(
                           title: Text('Home',
@@ -118,7 +118,7 @@ class _MobileViewHomePageState extends ConsumerState<MobileViewHomePage> {
                     const Gap(15),
                     GestureDetector(
                         onTap: () {
-                          _homePageProvider.changeIndex(3);
+                         // _homePageProvider.changeIndex(3);
                         },
                         child: ListTile(
                           title: Text('Dashboard',
@@ -187,109 +187,7 @@ class _MobileViewHomePageState extends ConsumerState<MobileViewHomePage> {
                   ]),
             ),
           ),),
-      body: _homePageProvider.load
-          ? Center(
-              child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Gap(100),
-                CircularProgressIndicator(
-                  color: darkBlueColor,
-                ),
-              ],
-            ))
-          : SingleChildScrollView(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconButton(
-                          icon: const Icon(Icons.menu),
-                          onPressed: () {
-                            _key.currentState!.openDrawer();
-                          },
-                        ),
-                        const Icon(Icons.search),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: NewsWidget(
-                      articleId: _homePageProvider.newsList![0]!.articleId,
-                      userId: _homePageProvider.newsList![0]!.userId,
-                      image: _homePageProvider.newsList![0]!.image,
-                      body: _homePageProvider.newsList![0]!.body,
-                      title: _homePageProvider.newsList![0]!.title,
-                    ),
-                  ),
-                  Gap(20.h),
-                  ListView.separated(
-                    shrinkWrap: true,
-                      separatorBuilder: (context, int) {
-                        return const Divider();
-                      },
-                      itemCount: _homePageProvider.newsList!.length,
-                      itemBuilder: (context, index) {
-                        return GestureDetector(
-                          onTap: (){
-                             Navigator.push(context,
-                                                MaterialPageRoute(
-                                                    builder: (context) {
-                                              return MobileViewNews(
-                                                  articleId: _homePageProvider
-                                                      .newsList![index]!
-                                                      .articleId
-                                                      .toString(), editorsId:_homePageProvider
-                                                      .newsList![index]!
-                                                      .userId.toString() ,);
-                                            }));
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                              height: 158,
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const Text('June 24, 2022'),
-                                        Gap(8.h),
-                                        TitleWidget(
-                                          width: 530,
-                                          fontSize: 12.sp,
-                                          title: _homePageProvider
-                                              .newsList![index]!.title!
-                                              .substring(40),
-                                        ),
-                                        Gap(8.h),
-                                        Text('Read More',
-                                            style: TextStyle(color: lightBlue)),
-                                      ],
-                                    ),
-                                  ),
-                                  CachedNetworkImage(
-                                    imageUrl: _homePageProvider
-                                        .newsList![index]!.image
-                                        .toString(),
-                                    height: 100.h,
-                                    width: 166.w,
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        );
-                      })
-                ],
-              ),
-            ),
+      body:_homePageProvider.mobileWidgetList[_homePageProvider.currentIndex]
     );
   }
 }
