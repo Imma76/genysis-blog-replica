@@ -11,14 +11,14 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../controllers/all_providers/all_providers.dart';
 
-class UserPosts extends ConsumerStatefulWidget {
-  const UserPosts({Key? key}) : super(key: key);
+class MobileUserPosts extends ConsumerStatefulWidget {
+  const MobileUserPosts({Key? key}) : super(key: key);
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _UserPostsState();
 }
 
-class _UserPostsState extends ConsumerState<UserPosts> {
+class _UserPostsState extends ConsumerState<MobileUserPosts> {
   @override
   void initState() {
     // TODO: implement initState

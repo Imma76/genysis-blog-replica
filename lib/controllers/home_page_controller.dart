@@ -7,10 +7,11 @@ import 'package:genesys_blog/views/desktop_view/users_dashboard.dart';
 import 'package:genesys_blog/views/home_page.dart';
 import 'package:genesys_blog/views/mobile_view/mobile_dashboard.dart';
 import 'package:genesys_blog/views/mobile_view/mobile_home_page.dart';
+import 'package:genesys_blog/views/mobile_view/posts.dart';
 
 class HomePageController extends ChangeNotifier {
   int _currentIndex = 0;
-   final key = GlobalKey<ScaffoldState>();
+  final key = GlobalKey<ScaffoldState>();
   int get currentIndex => _currentIndex;
   bool load = false;
   List<PostsModel?>? newsList;
@@ -20,10 +21,10 @@ class HomePageController extends ChangeNotifier {
     const UserDrafts(),
     const UserDashBoardDesktopView(),
   ];
-    List<Widget> mobileWidgetList = [
-   MobileHomePage(),
-   UserPost(),
-   MobileDashboard()
+  List<Widget> mobileWidgetList = [
+    const MobileHomePage(),
+    const MobileUserPosts(),
+    const MobileDashboard()
   ];
 
   PostsModel? news;
