@@ -6,18 +6,19 @@ import 'package:genesys_blog/controllers/all_providers/all_providers.dart';
 import 'package:genesys_blog/controllers/drafts_controller.dart';
 import 'package:genesys_blog/controllers/post_controller.dart';
 import 'package:genesys_blog/views/desktop_view/users_dashboard.dart';
+import 'package:genesys_blog/widgets/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 
 class MobileDashboard extends ConsumerStatefulWidget {
   const MobileDashboard({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _MobileDashboardState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _MobileDashboardState();
 }
 
 class _MobileDashboardState extends ConsumerState<MobileDashboard> {
-   @override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -26,11 +27,12 @@ class _MobileDashboardState extends ConsumerState<MobileDashboard> {
     _draftProvider.getDrafts();
     postController.getUserDetails();
   }
+
   @override
   Widget build(BuildContext context) {
-  PostController postController = ref.watch(postProvider);
+    PostController postController = ref.watch(postProvider);
     DraftsController _draftProvider = ref.watch(draftsProvider);
-   
+
     return SingleChildScrollView(
       child: postController.load && _draftProvider.load
           ? Center(
@@ -40,7 +42,7 @@ class _MobileDashboardState extends ConsumerState<MobileDashboard> {
           : Column(children: [
               const Gap(39),
               Padding(
-                padding: const EdgeInsets.only(left: 40),
+                padding: const EdgeInsets.only(left: 20, right: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -69,8 +71,9 @@ class _MobileDashboardState extends ConsumerState<MobileDashboard> {
                           fontWeight: FontWeight.w400),
                     ),
                     const Gap(36),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    Wrap(
+                      runSpacing: 20,
+                      //crossAxisAlignment: CrossAxisAlignment.start,
                       //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         DashboardMetricsWidget(
@@ -79,14 +82,14 @@ class _MobileDashboardState extends ConsumerState<MobileDashboard> {
                           mertricNumber:
                               postController.userDetails!.postLength.toString(),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         DashboardMetricsWidget(
                           boxType: 'Drafts',
                           imagePath: 'assets/mail.png',
                           mertricNumber:
                               _draftProvider.draftsList!.length.toString(),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         DashboardMetricsWidget(
                           boxType: 'Post reactions',
                           imagePath: 'assets/reactions.png',
@@ -94,7 +97,7 @@ class _MobileDashboardState extends ConsumerState<MobileDashboard> {
                               .userDetails!.postReactions
                               .toString(),
                         ),
-                        Spacer(),
+                        const Spacer(),
                       ],
                     ),
                     const Gap(40),
@@ -113,7 +116,16 @@ class _MobileDashboardState extends ConsumerState<MobileDashboard> {
                           return const Divider();
                         },
                         itemBuilder: (context, index) {
-                          return const RecentlyCreated();
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: UserPostsWidget(
+                              views: postController
+                                  .userDetails!.postList![index]!.views
+                                  .toString(),
+                              articleId: postController
+                                  .userDetails!.postList![0]!.articleId,
+                            ),
+                          );
                         })
                   ],
                 ),
