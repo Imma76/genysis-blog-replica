@@ -5,6 +5,7 @@ import 'package:genesys_blog/views/desktop_view/user_drafts.dart';
 import 'package:genesys_blog/views/desktop_view/user_post.dart';
 import 'package:genesys_blog/views/desktop_view/users_dashboard.dart';
 import 'package:genesys_blog/views/home_page.dart';
+import 'package:genesys_blog/views/mobile_view/mobile_dashboard.dart';
 import 'package:genesys_blog/views/mobile_view/mobile_home_page.dart';
 
 class HomePageController extends ChangeNotifier {
@@ -21,7 +22,8 @@ class HomePageController extends ChangeNotifier {
   ];
     List<Widget> mobileWidgetList = [
    MobileHomePage(),
-   UserPost()
+   UserPost(),
+   MobileDashboard()
   ];
 
   PostsModel? news;
