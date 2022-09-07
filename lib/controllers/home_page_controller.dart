@@ -21,7 +21,7 @@ class HomePageController extends ChangeNotifier {
   ];
     List<Widget> mobileWidgetList = [
    MobileHomePage(),
-   Mobile
+   UserPost()
   ];
 
   PostsModel? news;
