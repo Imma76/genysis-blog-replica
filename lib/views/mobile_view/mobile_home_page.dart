@@ -19,7 +19,7 @@ class MobileHomePage extends ConsumerStatefulWidget {
 }
 
 class _HomePageState extends ConsumerState<MobileHomePage> {
-    final _key = GlobalKey<ScaffoldState>();
+   
   @override
   Widget build(BuildContext context) {
     HomePageController _homePageProvider = ref.watch(homePageProvider);
@@ -45,7 +45,7 @@ class _HomePageState extends ConsumerState<MobileHomePage> {
                         IconButton(
                           icon: const Icon(Icons.menu),
                           onPressed: () {
-                            _key.currentState!.openDrawer();
+                            _homePageProvider.key.currentState!.openDrawer();
                           },
                         ),
                         const Icon(Icons.search),

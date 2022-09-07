@@ -34,13 +34,13 @@ class _MobileViewHomePageState extends ConsumerState<MobileViewHomePage> {
     _userController.init();
   }
 
-  final _key = GlobalKey<ScaffoldState>();
+  
   @override
   Widget build(BuildContext context) {
     HomePageController _homePageProvider = ref.watch(homePageProvider);
      UserController _userController = ref.watch(userProvider);
     return Scaffold(
-      key: _key,
+      key: _homePageProvider.key,
 
       appBar: AppBar(
         iconTheme: IconThemeData(color: darkBlueColor),

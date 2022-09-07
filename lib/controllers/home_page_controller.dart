@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:genesys_blog/models/post_model.dart';
 import 'package:genesys_blog/services/post.dart';
-import 'package:genesys_blog/views/desktop_view/home_page.dart';
 import 'package:genesys_blog/views/desktop_view/user_drafts.dart';
 import 'package:genesys_blog/views/desktop_view/user_post.dart';
 import 'package:genesys_blog/views/desktop_view/users_dashboard.dart';
 import 'package:genesys_blog/views/home_page.dart';
+import 'package:genesys_blog/views/mobile_view/mobile_home_page.dart';
 
 class HomePageController extends ChangeNotifier {
   int _currentIndex = 0;
+   final key = GlobalKey<ScaffoldState>();
   int get currentIndex => _currentIndex;
   bool load = false;
   List<PostsModel?>? newsList;
@@ -19,7 +20,8 @@ class HomePageController extends ChangeNotifier {
     const UserDashBoardDesktopView(),
   ];
     List<Widget> mobileWidgetList = [
-   MobileHomePage()
+   MobileHomePage(),
+   Mobile
   ];
 
   PostsModel? news;
