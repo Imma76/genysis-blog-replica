@@ -123,7 +123,7 @@ class _MobileViewHomePageState extends ConsumerState<MobileViewHomePage> {
                               )),
                           const Gap(15),
                           GestureDetector(
-                              onTap: () {
+                              onTap: () {Navigator.pop(context);
                                  _homePageProvider.changeIndex(2);
                               },
                               child: ListTile(
@@ -135,7 +135,7 @@ class _MobileViewHomePageState extends ConsumerState<MobileViewHomePage> {
                               )),
                           const Gap(15),
                           GestureDetector(
-                              onTap: () {
+                              onTap: () {Navigator.pop(context);
                                 // Navigator.push(context,
                                 //     MaterialPageRoute(builder: (context) {
                                 //   return const UserPost();
@@ -151,7 +151,7 @@ class _MobileViewHomePageState extends ConsumerState<MobileViewHomePage> {
                               )),
                           const Gap(15),
                           GestureDetector(
-                              onTap: () {
+                              onTap: () {Navigator.pop(context);
                                 // Navigator.push(context,
                                 //     MaterialPageRoute(builder: (context) {
                                 //   return const UserDrafts();
