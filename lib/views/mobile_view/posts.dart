@@ -31,7 +31,7 @@ class _UserPostsState extends ConsumerState<MobileUserPosts> {
   Widget build(BuildContext context) {
       PostController postController = ref.watch(postProvider);
     UserController _userController = ref.watch(userProvider);
-    return Container(
+    return Container( 
           child:  postController.load
           ? Center(
               child: CircularProgressIndicator(

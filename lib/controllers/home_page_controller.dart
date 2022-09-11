@@ -11,7 +11,7 @@ import 'package:genesys_blog/views/mobile_view/posts.dart';
 
 class HomePageController extends ChangeNotifier {
   int _currentIndex = 0;
-  final key = GlobalKey<ScaffoldState>();
+  GlobalKey<ScaffoldState> key = GlobalKey<ScaffoldState>();
   int get currentIndex => _currentIndex;
   bool load = false;
   List<PostsModel?>? newsList;
