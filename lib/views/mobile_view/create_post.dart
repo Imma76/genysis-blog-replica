@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:genesys_blog/constant.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:super_editor/super_editor.dart';
 import 'package:text_style_editor/text_style_editor.dart';
 
 class MobileCreatePost extends ConsumerStatefulWidget {
@@ -56,69 +57,73 @@ class _MobileCreatePostState extends ConsumerState<MobileCreatePost> {
     Color(int.parse('0xff1289A7')),
     Color(int.parse('0xffD980FA'))
   ];
+  // A MutableDocument is an in-memory Document. Create the starting
+// content that you want your editor to display.
+//
+// Your MutableDocument does not need to contain any content/nodes.
+// In that case, your editor will initially display nothing.
+final myDoc = MutableDocument(
+  nodes: [
+    ParagraphNode(
+      id: DocumentEditor.createNodeId(),
+      text: AttributedText(text: 'This is a header'),
+      metadata: {
+        'blockType': header1Attribution,
+      },
+    ),
+    ParagraphNode(
+      id: DocumentEditor.createNodeId(),
+      text: AttributedText(text:'This is the first paragraph'),
+    ),
+  ],
+);
+
+// With a MutableDocument, create a DocumentEditor, which knows how
+// to apply changes to the MutableDocument.
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body:  Column(
-          children: <Widget>[
-            Gap(20),
-             Text('Create New Post',
-                                style: GoogleFonts.poppins(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.w400,
-                                    color: black)),
-            Expanded(
-              child: Align(
-                alignment: Alignment.center,
-                child: TextFormField( style: textStyle,
-                  textAlign: textAlign,
-                  maxLines: 10,),
-                 
-                
-              ),
-            ),
-            Expanded(
-              child: SafeArea(
-                bottom: false,
-                child: Container(
-                  height: 300,
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    border: Border.symmetric(
-                      horizontal: BorderSide(
-                        color: Theme.of(context).backgroundColor,
-                      ),
+    return  SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Container(
+              height:400,
+              decoration: BoxDecoration(border: Border.all(color:black), borderRadius: BorderRadius.circular(10)),
+              child: SingleChildScrollView(
+                child: SuperEditor.custom(
+                        editor: DocumentEditor(document: myDoc),
+                        selectionStyle: /** INSERT CUSTOMIZATION **/ null,
+                        stylesheet: defaultStylesheet.copyWith(
+                            addRulesAfter: [
+                                // Add any custom document styles, for example, you might
+                                // apply styles to a custom Task node type.
+                                StyleRule(
+                                    const BlockSelector("task"),
+                                    (document, node) {
+                                        // if (node is! TaskNode) {
+                                        //     return {};
+                                        // }
+                  
+                                        return {
+                                            "padding": const CascadingPadding.only(top: 24),
+                                        };
+                                    },
+                                )
+                            ],
+                        ),
+                        componentBuilders: [
+                          ...defaultComponentBuilders,
+                          // Add any of your own custom builders for document
+                          // components, e.g., paragraphs, images, list items.
+                        ],
                     ),
-                  ),
-                  child: Align(
-                    alignment: Alignment.topCenter,
-                    child: TextStyleEditor(
-                      fonts: fonts,
-                      paletteColors: paletteColors,
-                      textStyle: textStyle,
-                      textAlign: textAlign,
-                      initialTool: EditorToolbarAction.fontFamilyTool,
-                      onTextAlignEdited: (align) {
-                        setState(() {
-                          textAlign = align;
-                        });
-                      },
-                      onTextStyleEdited: (style) {
-                        setState(() {
-                          textStyle = textStyle.merge(style);
-                        });
-                      },
-                      onCpasLockTaggle: (caps) {
-                        print(caps);
-                      },
-                    ),
-                  ),
-                ),
               ),
             ),
           ],
         ),
-      
+      ),
     );
   }
 }

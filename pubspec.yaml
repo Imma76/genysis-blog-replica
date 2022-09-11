@@ -44,6 +44,7 @@ dependencies:
   path: ^1.8.0
   responsive_builder: ^0.4.2
   shared_preferences: ^2.0.15
+  super_editor: ^0.2.2
   text_style_editor: ^1.1.1
 
 dev_dependencies:
