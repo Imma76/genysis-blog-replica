@@ -188,12 +188,7 @@ class _UserPostState extends ConsumerState<UserPost> {
                                       setState(() {
                                         if (isSelected) {
                                           filterOption.clear();
-                                          //print(controller.currentPlace);
-                                          //currentIndex.value = option[ndex]
-                                          // controller.getLocationData(
-                                          //     category: option.name,
-                                          //     city: controller
-                                          //         .currentPlace.value);
+                                          
 
                                           filterOption.add(option.name);
                                           selected = true;
