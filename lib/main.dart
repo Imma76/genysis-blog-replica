@@ -6,6 +6,7 @@ import 'package:genesys_blog/controllers/user_controller.dart';
 import 'package:genesys_blog/views/desktop_view/authentication_view/sign_up.dart';
 import 'package:genesys_blog/views/desktop_view/desktop_view_home_page.dart';
 import 'package:genesys_blog/views/mobile_view/authentication_view/sign_in.dart';
+import 'package:genesys_blog/views/mobile_view/create_post.dart';
 import 'package:genesys_blog/views/mobile_view/mobile_view_home_page.dart';
 import 'package:genesys_blog/views/mobile_view/posts.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -71,7 +72,7 @@ class _MyAppState extends ConsumerState<MyApp> {
           mobile: ScreenUtilInit(
               designSize: const Size(414, 1024),
               builder: (context, c) {
-                return MobileViewHomePage();
+                return MobileCreatePost();
               }),
         ));
   }
