@@ -37,21 +37,7 @@ class _HomePageState extends ConsumerState<MobileHomePage> {
           : SingleChildScrollView(
               child: Column(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconButton(
-                          icon: const Icon(Icons.menu),
-                          onPressed: () {
-                            _homePageProvider.key.currentState!.openDrawer();
-                          },
-                        ),
-                        const Icon(Icons.search),
-                      ],
-                    ),
-                  ),
+                
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: NewsWidget(

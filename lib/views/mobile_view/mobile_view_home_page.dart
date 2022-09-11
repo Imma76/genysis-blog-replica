@@ -41,7 +41,7 @@ class _MobileViewHomePageState extends ConsumerState<MobileViewHomePage> {
     return Scaffold(
         key: _homePageProvider.key,
         appBar: AppBar(
-          iconTheme: IconThemeData(color: darkBlueColor),
+          iconTheme: IconThemeData(color: Colors.white),
           elevation: 0.0,
           title: Text(
             'Genesys Blog',
