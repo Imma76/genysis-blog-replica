@@ -11,13 +11,25 @@ import 'package:http/http.dart' as http;
 import '../models/user_details_model.dart';
 
 class PostService {
-  // Future<NewsModel> postArticle()async{
-  //   try{
-  //     http.Response response = await http.MultipartRequest()
-  //   }catch(e){
+  Future postArticle(
+      {required String title, body, category, required File image}) async {
+    UserModel _userData = await UserSharedPref.getUser();
+    Map bodyData = {
+      'title': title,
+      'body': body,
+      'category': category,
+      'image': image
+    };
+    try {
+      var response = await http.post(Uri.parse(baseUrl + '/post'),
+          body: bodyData,
+          headers: {'Authorization': 'Bearer ${_userData.token}'});
+      print(response.body);
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 
-  //   }
-  // }
   Future<List<PostsModel?>?> getPosts(String category) async {
     List<PostsModel?> newsModel = [];
     try {
@@ -95,21 +107,13 @@ class PostService {
       print(_userData.userId);
       var response = await http.get(
         Uri.parse(baseUrl + 'users/${_userData.userId}'),
-        // headers: {
-        //   'Authorization':'Bearer ${_userData.token}'
-        // }
       );
       var decode = jsonDecode(response.body);
-    //  print(decode);
-      // if (decode['body'] == 'no post found') {
-      //   return postList;
-      // }
-      //for (int post = 0; post < decode['body']['userPost'].length; post++) {
-        for (int i = 0; i < decode['body']['userPost'].length; i++) {
-      PostsModel _postList = PostsModel.fromJson(decode['body']['userPost'][i]);
-      postList.add(_postList);
-     
-    }
+      for (int i = 0; i < decode['body']['userPost'].length; i++) {
+        PostsModel _postList =
+            PostsModel.fromJson(decode['body']['userPost'][i]);
+        postList.add(_postList);
+      }
       UserDetails userDetails = UserDetails.fromJson(decode['body'], postList);
 
       //}
