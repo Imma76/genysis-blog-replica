@@ -11,7 +11,7 @@ import 'package:http/http.dart' as http;
 import '../models/user_details_model.dart';
 
 class PostService {
-  Future postArticle(
+  Future createArticle(
       {required String title, body, category, required File image}) async {
     UserModel _userData = await UserSharedPref.getUser();
     Map bodyData = {

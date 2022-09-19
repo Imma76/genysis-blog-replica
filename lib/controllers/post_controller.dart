@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:genesys_blog/models/user_details_model.dart';
 import 'package:genesys_blog/services/post.dart';
@@ -8,6 +10,9 @@ class PostController extends ChangeNotifier {
   List<PostsModel?>? userPosts;
   UserDetails? userDetails;
   bool load = false;
+  TextEditingController titleController = TextEditingController();
+  TextEditingController bodyController = TextEditingController();
+
   PostsModel? news;
   PostService postService = PostService();
 
@@ -54,5 +59,9 @@ class PostController extends ChangeNotifier {
       load = false;
       notifyListeners();
     }
+  }
+
+  Future createPost({required File image}) async {
+    final response = await postService.createArticle(title: titleController.text.trim(), body: bodyController.text.trim(), image: image);
   }
 }
