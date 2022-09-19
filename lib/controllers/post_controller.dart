@@ -61,7 +61,7 @@ class PostController extends ChangeNotifier {
     }
   }
 
-  Future createPost({required File image}) async {
+  Future createPost({required File image, required String category}) async {
     final response = await postService.createArticle(title: titleController.text.trim(), body: bodyController.text.trim(), image: image);
   }
 }

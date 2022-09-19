@@ -1,9 +1,15 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:genesys_blog/constant.dart';
+import 'package:genesys_blog/controllers/post_controller.dart';
 import 'package:genesys_blog/widgets/category.dart';
 import 'package:super_editor/super_editor.dart';
+
+import '../../controllers/all_providers/all_providers.dart';
 
 class MobileCreatePost extends ConsumerStatefulWidget {
   const MobileCreatePost({Key? key}) : super(key: key);
@@ -16,6 +22,7 @@ class MobileCreatePost extends ConsumerStatefulWidget {
 class _MobileCreatePostState extends ConsumerState<MobileCreatePost> {
   List filterOption = [];
   bool selected = false;
+
   // A MutableDocument is an in-memory Document. Create the starting
 // content that you want your editor to display.
 //
@@ -56,8 +63,14 @@ class _MobileCreatePostState extends ConsumerState<MobileCreatePost> {
 
   @override
   Widget build(BuildContext context) {
+    PostController postController = ref.watch(postProvider);
     return Scaffold(
-      appBar:AppBar(backgroundColor: Colors.transparent,elevation: 0.0,leading: IconButton(icon:Icon(Icons.arrow_back, color:black), onPressed:(){}),),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: black), onPressed: () {}),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(
@@ -106,25 +119,25 @@ class _MobileCreatePostState extends ConsumerState<MobileCreatePost> {
               //                 ],
               //               ),
               //             ),
-        
+
               //         Container(  height: 500,
               //         child: TextField(
               //           maxLines: 100,
               //           style: textStyle,
-        
+
               //         ),
               //          decoration: BoxDecoration(
               //                 border: Border.all(color: black),
               //                 borderRadius: BorderRadius.circular(10)
-        
+
               //                 ),),
               //         Container(
               //             height: 200,
-        
+
               //             decoration: BoxDecoration(
               //                 // border: Border.all(color: black),
               //                 // borderRadius: BorderRadius.circular(10)
-        
+
               //                 ),
               //             child: TextStyleEditor(
               //               fonts: const [
@@ -168,7 +181,7 @@ class _MobileCreatePostState extends ConsumerState<MobileCreatePost> {
               //             //             // if (node is! TaskNode) {
               //             //             //     return {};
               //             //             // }
-        
+
               //             //             return {
               //             //               "padding": const CascadingPadding.only(top: 24),
               //             //             };
@@ -185,8 +198,9 @@ class _MobileCreatePostState extends ConsumerState<MobileCreatePost> {
               //             // ),
               //             ),
               //         const Gap(10),
-              const TextField(
+              TextField(
                 //  maxLines: 3,
+                controller: postController.titleController,
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                 decoration: InputDecoration(
                     hintText: 'Title',
@@ -194,12 +208,13 @@ class _MobileCreatePostState extends ConsumerState<MobileCreatePost> {
                         TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     border: InputBorder.none),
               ),
-              TextField(
+              TextField(  controller: postController.bodyController,
                 maxLines: 20,
                 decoration: InputDecoration(
-                    hintText: '\nwhats on your mind?', hintStyle:
-                      TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                 border: InputBorder.none),
+                    hintText: '\nwhats on your mind?',
+                    hintStyle:
+                        TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    border: InputBorder.none),
               ),
               Wrap(
                   spacing: 5.0,
@@ -212,7 +227,8 @@ class _MobileCreatePostState extends ConsumerState<MobileCreatePost> {
                           color: filterOption.contains(option.name)
                               ? Colors.white
                               : darkBlueColor,
-                          width: filterOption.contains(option.name) ? 3.0 : 1.0),
+                          width:
+                              filterOption.contains(option.name) ? 3.0 : 1.0),
                       backgroundColor: Colors.white,
                       disabledColor: white,
                       selectedColor: darkBlueColor,
@@ -221,7 +237,7 @@ class _MobileCreatePostState extends ConsumerState<MobileCreatePost> {
                         setState(() {
                           if (isSelected) {
                             filterOption.clear();
-        
+
                             filterOption.add(option.name);
                             selected = true;
                           } else {
@@ -238,22 +254,33 @@ class _MobileCreatePostState extends ConsumerState<MobileCreatePost> {
                                   : darkBlueColor)),
                     );
                   }).toList()),
-                      const Gap(10),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {},
-                            child: const Text('Post'),
-                            style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10)),
-                                primary: darkBlueColor,
-                                fixedSize: const Size(65, 42)),
-                          ),
-                        ],
-                      )
+              const Gap(10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  ElevatedButton(
+                    onPressed: () async {
+                      FilePickerResult? result =
+                          await FilePicker.platform.pickFiles();
+
+                      if (result != null) {
+                        File file = File(result.files.single.path.toString());
+                        await postController.createPost(image: file, category:filterOption[0]);
+                      } else {
+                        return;
+                        // User canceled the picker
+                      }
+                    },
+                    child: const Text('Post'),
+                    style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        primary: darkBlueColor,
+                        fixedSize: const Size(65, 42)),
+                  ),
+                ],
+              )
             ],
           ),
         ),
