@@ -30,6 +30,7 @@ dependencies:
   bot_toast: ^4.0.3
   cached_network_image: ^3.0.0
   cupertino_icons: ^1.0.2
+  file_picker: ^5.2.0
   flutter:
     sdk: flutter
   flutter_markdown: ^0.6.9
