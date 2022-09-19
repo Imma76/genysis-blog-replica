@@ -39,106 +39,220 @@ class _MobileCreatePostState extends ConsumerState<MobileCreatePost> {
 
 // With a MutableDocument, create a DocumentEditor, which knows how
 // to apply changes to the MutableDocument.
+  TextStyle textStyle = const TextStyle();
+  TextAlign textAlign = TextAlign.center;
+  // QuillController _controller = QuillController.basic();
+  String description = 'My great package';
+  TextEditingController controller = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    controller.addListener(() {
+      print(controller.text);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Container(
-                height: 400,
-                decoration: BoxDecoration(
-                    border: Border.all(color: black),
-                    borderRadius: BorderRadius.circular(10)),
-                child: SingleChildScrollView(
-                  child: SuperEditor.custom(
-                    editor: DocumentEditor(document: myDoc),
-                    selectionStyle: /** INSERT CUSTOMIZATION **/ null,
-                    stylesheet: defaultStylesheet.copyWith(
-                      addRulesAfter: [
-                        // Add any custom document styles, for example, you might
-                        // apply styles to a custom Task node type.
-                        StyleRule(
-                          const BlockSelector("task"),
-                          (document, node) {
-                            // if (node is! TaskNode) {
-                            //     return {};
-                            // }
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            //           Expanded(child: Container(
+            //             height:500,
+            //             child: QuillToolbar.basic(controller: _controller,))),
+            // Expanded(
+            //   child: Container(
+            //   height:400,
+            //   child: QuillEditor.basic(
+            //     controller: _controller,
+            //     readOnly: false, // true for view only mode
+            //   ),
+            //   ),
+            // ),
+            //         Padding(
+            //               padding: const EdgeInsets.symmetric(vertical: 100),
+            //               child: Column(
+            //                 mainAxisSize: MainAxisSize.min,
+            //                 crossAxisAlignment: CrossAxisAlignment.stretch,
+            //                 children: <Widget>[
+            //                   MarkdownTextInput(
+            //                     (String value) => setState(() => description = value),
+            //                     description,
+            //                     label: 'Description',
+            //                     maxLines: 10,
+            //                     actions: MarkdownType.values,
+            //                     controller: controller,
+            //                   ),
+            //                   // TextButton(
+            //                   //   onPressed: () {
+            //                   //     controller.clear();
+            //                   //   },
+            //                   //   child: Text('Clear'),
+            //                   // ),
+            //                   Padding(
+            //                     padding: const EdgeInsets.only(top: 10),
+            //                     child: MarkdownBody(
+            //                       data: description,
+            //                       shrinkWrap: true,
+            //                     ),
+            //                   ),
+            //                 ],
+            //               ),
+            //             ),
 
-                            return {
-                              "padding": const CascadingPadding.only(top: 24),
-                            };
-                          },
-                        )
+            //         Container(  height: 500,
+            //         child: TextField(
+            //           maxLines: 100,
+            //           style: textStyle,
+
+            //         ),
+            //          decoration: BoxDecoration(
+            //                 border: Border.all(color: black),
+            //                 borderRadius: BorderRadius.circular(10)
+
+            //                 ),),
+            //         Container(
+            //             height: 200,
+
+            //             decoration: BoxDecoration(
+            //                 // border: Border.all(color: black),
+            //                 // borderRadius: BorderRadius.circular(10)
+
+            //                 ),
+            //             child: TextStyleEditor(
+            //               fonts: const [
+            //                 'Montserrat-Medium.ttf',
+            //                 'Monteserrat-Regular.ttf',
+            //                 'Monteserrat-SemiBold.ttf',
+            //               ],
+            //               textStyle: textStyle,
+            //               textAlign: textAlign,
+            //               paletteColors: const [
+            //                 Colors.red,
+            //                 Colors.blue,
+            //                 Colors.green,
+            //                 Colors.yellow,
+            //               ],
+            //               onTextAlignEdited: (align) {
+            //                 setState(() {
+            //                   textAlign = align;
+            //                 });
+            //               },
+            //               onTextStyleEdited: (style) {
+            //                 setState(() {
+            //                   textStyle = textStyle.merge(style);
+            //                 });
+            //               },
+            //               onCpasLockTaggle: (caps) {
+            //                 // Uppercase or lowercase letters
+            //               },
+            //             )
+            //             // SingleChildScrollView(
+            //             //   child: SuperEditor.custom(
+            //             //     editor: DocumentEditor(document: myDoc),
+            //             //     selectionStyle: /** INSERT CUSTOMIZATION **/ null,
+            //             //     stylesheet: defaultStylesheet.copyWith(
+            //             //       addRulesAfter: [
+            //             //         // Add any custom document styles, for example, you might
+            //             //         // apply styles to a custom Task node type.
+            //             //         StyleRule(
+            //             //           const BlockSelector("task"),
+            //             //           (document, node) {
+            //             //             // if (node is! TaskNode) {
+            //             //             //     return {};
+            //             //             // }
+
+            //             //             return {
+            //             //               "padding": const CascadingPadding.only(top: 24),
+            //             //             };
+            //             //           },
+            //             //         )
+            //             //       ],
+            //             //     ),
+            //             //     componentBuilders: [
+            //             //       ...defaultComponentBuilders,
+            //             //       // Add any of your own custom builders for document
+            //             //       // components, e.g., paragraphs, images, list items.
+            //             //     ],
+            //             //   ),
+            //             // ),
+            //             ),
+            //         const Gap(10),
+            const TextField(
+              //  maxLines: 3,
+              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+              decoration: InputDecoration(
+                  hintText: 'Title',
+                  hintStyle:
+                      TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                  border: InputBorder.none),
+            ),
+            TextField(
+              maxLines: 20,
+              decoration: InputDecoration(
+                  hintText: '\nwhats on your mind?', hintStyle:
+                    TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+               border: InputBorder.none),
+            ),
+            Wrap(
+                spacing: 5.0,
+                runSpacing: 5.0,
+                children: Category.values.map((option) {
+                  return FilterChip(
+                    showCheckmark: false,
+                    checkmarkColor: Colors.white,
+                    side: BorderSide(
+                        color: filterOption.contains(option.name)
+                            ? Colors.white
+                            : darkBlueColor,
+                        width: filterOption.contains(option.name) ? 3.0 : 1.0),
+                    backgroundColor: Colors.white,
+                    disabledColor: white,
+                    selectedColor: darkBlueColor,
+                    selected: filterOption.contains(option.name),
+                    onSelected: (isSelected) {
+                      setState(() {
+                        if (isSelected) {
+                          filterOption.clear();
+
+                          filterOption.add(option.name);
+                          selected = true;
+                        } else {
+                          selected = false;
+                          // filterOptions.remove(option.name.obs);
+                        }
+                      });
+                    },
+                    labelStyle: const TextStyle(color: Colors.red),
+                    label: Text(option.name,
+                        style: TextStyle(
+                            color: filterOption.contains(option.name)
+                                ? Colors.white
+                                : darkBlueColor)),
+                  );
+                }).toList()),
+                    const Gap(10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {},
+                          child: const Text('Post'),
+                          style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                              primary: darkBlueColor,
+                              fixedSize: const Size(65, 42)),
+                        ),
                       ],
-                    ),
-                    componentBuilders: [
-                      ...defaultComponentBuilders,
-                      // Add any of your own custom builders for document
-                      // components, e.g., paragraphs, images, list items.
-                    ],
-                  ),
-                ),
-              ),
-              const Gap(10),
-              Wrap(
-                  spacing: 5.0,
-                  runSpacing: 5.0,
-                  children: Category.values.map((option) {
-                    return FilterChip(
-                      showCheckmark: false,
-                      checkmarkColor: Colors.white,
-                      side: BorderSide(
-                          color: filterOption.contains(option.name)
-                              ? Colors.white
-                              : darkBlueColor,
-                          width:
-                              filterOption.contains(option.name) ? 3.0 : 1.0),
-                      backgroundColor: Colors.white,
-                      disabledColor: white,
-                      selectedColor: darkBlueColor,
-                      selected: filterOption.contains(option.name),
-                      onSelected: (isSelected) {
-                        setState(() {
-                          if (isSelected) {
-                            filterOption.clear();
-
-                            filterOption.add(option.name);
-                            selected = true;
-                          } else {
-                            selected = false;
-                            // filterOptions.remove(option.name.obs);
-                          }
-                        });
-                      },
-                      labelStyle: const TextStyle(color: Colors.red),
-                      label: Text(option.name,
-                          style: TextStyle(
-                              color: filterOption.contains(option.name)
-                                  ? Colors.white
-                                  : darkBlueColor)),
-                    );
-                  }).toList()),
-                  Gap(10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: const Text('Post'),
-                    style: ElevatedButton.styleFrom(
-                        shape:  RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                        primary: darkBlueColor,
-                        fixedSize: const Size(65, 42)),
-                  ),
-                ],
-              )
-            ],
-          ),
+                    )
+          ],
         ),
       ),
     );
