@@ -72,7 +72,9 @@ class _MyAppState extends ConsumerState<MyApp> {
           mobile: ScreenUtilInit(
               designSize: const Size(414, 1024),
               builder: (context, c) {
-                return MobileCreatePost();
+                return _userController.email != null
+                    ? const MobileViewHomePage()
+                    : const SignUp();
               }),
         ));
   }
