@@ -88,7 +88,7 @@ class _HomePageState extends ConsumerState<MobileHomePage> {
                                           fontSize: 12.sp,
                                           title: _homePageProvider
                                               .newsList![index]!.title!
-                                              .substring(40),
+                                            
                                         ),
                                         Gap(8.h),
                                         Text('Read More',

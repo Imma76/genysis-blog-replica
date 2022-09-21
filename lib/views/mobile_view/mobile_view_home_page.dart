@@ -7,10 +7,7 @@ import 'package:gap/gap.dart';
 import 'package:genesys_blog/constant.dart';
 import 'package:genesys_blog/controllers/home_page_controller.dart';
 import 'package:genesys_blog/controllers/user_controller.dart';
-import 'package:genesys_blog/views/desktop_view/authentication_view/sign_in.dart';
 import 'package:genesys_blog/views/mobile_view/authentication_view/sign_in.dart';
-import 'package:genesys_blog/views/mobile_view/read_news.dart';
-import 'package:genesys_blog/widgets/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../controllers/all_providers/all_providers.dart';
@@ -41,7 +38,7 @@ class _MobileViewHomePageState extends ConsumerState<MobileViewHomePage> {
     return Scaffold(
         key: _homePageProvider.key,
         appBar: AppBar(
-          iconTheme: IconThemeData(color: Colors.white),
+          iconTheme: const IconThemeData(color: Colors.white),
           elevation: 0.0,
           title: Text(
             'Genesys Blog',
@@ -56,7 +53,7 @@ class _MobileViewHomePageState extends ConsumerState<MobileViewHomePage> {
         drawer: Drawer(
           child: Center(
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: _userController.firstName == null
                   ? Column(
                       children: [
@@ -64,7 +61,7 @@ class _MobileViewHomePageState extends ConsumerState<MobileViewHomePage> {
                             onTap: () async {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
-                                return MobileSignIn();
+                                return const MobileSignIn();
                               }));
                             },
                             child: ListTile(
@@ -110,8 +107,10 @@ class _MobileViewHomePageState extends ConsumerState<MobileViewHomePage> {
                           const Gap(20),
                           GestureDetector(
                               onTap: () {
-                                Navigator.pop(context);
-
+                                _homePageProvider.currentIndex == 0
+                                    ? Navigator.pop(context)
+                                    : _homePageProvider.changeIndex(0);
+                                //Navigator.pop(context);
                                 ///   _homePageProvider.changeIndex(0);
                               },
                               child: ListTile(
@@ -123,8 +122,9 @@ class _MobileViewHomePageState extends ConsumerState<MobileViewHomePage> {
                               )),
                           const Gap(15),
                           GestureDetector(
-                              onTap: () {Navigator.pop(context);
-                                 _homePageProvider.changeIndex(2);
+                              onTap: () {
+                                Navigator.pop(context);
+                                _homePageProvider.changeIndex(2);
                               },
                               child: ListTile(
                                 title: Text('Dashboard',
@@ -135,7 +135,8 @@ class _MobileViewHomePageState extends ConsumerState<MobileViewHomePage> {
                               )),
                           const Gap(15),
                           GestureDetector(
-                              onTap: () {Navigator.pop(context);
+                              onTap: () {
+                                Navigator.pop(context);
                                 // Navigator.push(context,
                                 //     MaterialPageRoute(builder: (context) {
                                 //   return const UserPost();
@@ -151,7 +152,8 @@ class _MobileViewHomePageState extends ConsumerState<MobileViewHomePage> {
                               )),
                           const Gap(15),
                           GestureDetector(
-                              onTap: () {Navigator.pop(context);
+                              onTap: () {
+                                Navigator.pop(context);
                                 // Navigator.push(context,
                                 //     MaterialPageRoute(builder: (context) {
                                 //   return const UserDrafts();
