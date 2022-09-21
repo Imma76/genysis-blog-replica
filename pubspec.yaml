@@ -41,8 +41,10 @@ dependencies:
   google_fonts: ^2.1.1
   hovering: ^1.0.4
   http: ^0.13.5
+  image_picker: ^0.8.5+3
   jiffy: ^5.0.0
   markdown_editable_textinput: ^2.0.2
+  mime: ^1.0.2
   path: ^1.8.0
   responsive_builder: ^0.4.2
   shared_preferences: ^2.0.15

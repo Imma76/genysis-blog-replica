@@ -12,6 +12,7 @@ import 'package:genesys_blog/views/mobile_view/posts.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import 'controllers/all_providers/all_providers.dart';
+import 'views/mobile_view/authentication_view/sign_up.dart';
 
 void main() async {
   runApp(const InitApp());
@@ -74,7 +75,7 @@ class _MyAppState extends ConsumerState<MyApp> {
               builder: (context, c) {
                 return _userController.email != null
                     ? const MobileViewHomePage()
-                    : const SignUp();
+                    : const MobileSignUp();
               }),
         ));
   }

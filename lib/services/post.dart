@@ -1,33 +1,47 @@
 import 'dart:convert';
 import 'dart:io';
-
+import 'package:http_parser/http_parser.dart';
 import 'package:genesys_blog/constant.dart';
-import 'package:genesys_blog/models/post_model.dart';
 import 'package:genesys_blog/models/post_model.dart';
 import 'package:genesys_blog/models/user_model.dart';
 import 'package:genesys_blog/utils/user_details.dart';
 import 'package:http/http.dart' as http;
+import 'package:mime/mime.dart';
 
 import '../models/user_details_model.dart';
 
 class PostService {
   Future createArticle(
-      {required String title, body, category, required File image}) async {
+      {required String title,
+      body,
+      category,
+      required var image,
+      String? filePath}) async {
+    final mimeTypeData = lookupMimeType(
+      filePath.toString(),headerBytes: [0xff,0xD8]
+    )!.split('/');
     UserModel _userData = await UserSharedPref.getUser();
-    Map bodyData = {
-      'title': title,
-      'body': body,
-      'category': category,
-      'image': image
-    };
-    try {
-      var response = await http.post(Uri.parse(baseUrl + '/post'),
-          body: bodyData,
-          headers: {'Authorization': 'Bearer ${_userData.token}'});
-      print(response.body);
-    } catch (e) {
-      print(e.toString());
-    }
+    var request = http.MultipartRequest('POST', Uri.parse(baseUrl + 'post'));
+    request.headers['Authorization'] = 'Bearer ${_userData.token}';
+    request.fields['title'] = title;
+    request.fields['body'] = body.toString();
+    request.fields['category'] = category.toLowerCase();
+  
+
+    request.files.add(await http.MultipartFile.fromPath(
+      'image',
+      filePath.toString(),contentType: MediaType(mimeTypeData[0], mimeTypeData[1])
+     
+    ));
+    await request.send().then((value) async {
+      final res = await http.Response.fromStream(value);
+     
+    }).catchError(
+      (onError) {
+        print(onError);
+      },
+    );
+   
   }
 
   Future<List<PostsModel?>?> getPosts(String category) async {

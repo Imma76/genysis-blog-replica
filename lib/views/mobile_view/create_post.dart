@@ -7,6 +7,7 @@ import 'package:gap/gap.dart';
 import 'package:genesys_blog/constant.dart';
 import 'package:genesys_blog/controllers/post_controller.dart';
 import 'package:genesys_blog/widgets/category.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:super_editor/super_editor.dart';
 
 import '../../controllers/all_providers/all_providers.dart';
@@ -22,7 +23,9 @@ class MobileCreatePost extends ConsumerStatefulWidget {
 class _MobileCreatePostState extends ConsumerState<MobileCreatePost> {
   List filterOption = [];
   bool selected = false;
-
+  String filePath = '';
+  File? file;
+  final _picker = ImagePicker();
   // A MutableDocument is an in-memory Document. Create the starting
 // content that you want your editor to display.
 //
@@ -201,16 +204,17 @@ class _MobileCreatePostState extends ConsumerState<MobileCreatePost> {
               TextField(
                 //  maxLines: 3,
                 controller: postController.titleController,
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                decoration: InputDecoration(
+                style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                decoration: const InputDecoration(
                     hintText: 'Title',
                     hintStyle:
                         TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     border: InputBorder.none),
               ),
-              TextField(  controller: postController.bodyController,
+              TextField(
+                controller: postController.bodyController,
                 maxLines: 20,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     hintText: '\nwhats on your mind?',
                     hintStyle:
                         TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
@@ -256,21 +260,46 @@ class _MobileCreatePostState extends ConsumerState<MobileCreatePost> {
                   }).toList()),
               const Gap(10),
               Row(
+                children: [
+                  const Gap(10),
+                  ElevatedButton(
+                    child: const Text('Pick file'),
+                    onPressed: () async {
+                      XFile? result = await _picker.pickImage(
+                          source: ImageSource.gallery,
+                          imageQuality: 25,
+                          maxHeight: 1024,
+                          maxWidth: 1024);
+
+                      if (result != null) {
+                        print(result.path);
+                        setState(() {
+                          print(result.name);
+                          filePath = result.path;
+                          print(filePath);
+                          file = File(result.path);
+                        });
+                      } else {
+                        print('null');
+                        return;
+                        // User canceled the picker
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20))),
+                  ),
+                ],
+              ),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   ElevatedButton(
                     onPressed: () async {
-                      FilePickerResult? result =
-                          await FilePicker.platform.pickFiles();
-
-                      if (result != null) {
-                        File file = File(result.files.single.path.toString());
-                        await postController.createPost(image: file, category:filterOption[0]);
-                      } else {
-                        return;
-                        // User canceled the picker
-                      }
+                      print(filterOption);
+                      await postController.createPost(
+                          image: file as File, category: filterOption[0], filePath:filePath);
                     },
                     child: const Text('Post'),
                     style: ElevatedButton.styleFrom(
