@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
@@ -297,11 +296,12 @@ class _MobileCreatePostState extends ConsumerState<MobileCreatePost> {
                 children: [
                   ElevatedButton(
                     onPressed: () async {
-                      print(filterOption);
+                      
                       await postController.createPost(
                           image: file as File, category: filterOption[0], filePath:filePath);
+
                     },
-                    child: const Text('Post'),
+                    child:postController.load?const Center(child:CircularProgressIndicator()): const Text('Post'),
                     style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10)),
