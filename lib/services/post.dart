@@ -11,37 +11,36 @@ import 'package:mime/mime.dart';
 import '../models/user_details_model.dart';
 
 class PostService {
-  Future createArticle(
+  Future<bool> createArticle(
       {required String title,
       body,
       category,
       required var image,
       String? filePath}) async {
-    final mimeTypeData = lookupMimeType(
-      filePath.toString(),headerBytes: [0xff,0xD8]
-    )!.split('/');
+    final mimeTypeData =
+        lookupMimeType(filePath.toString(), headerBytes: [0xff, 0xD8])!
+            .split('/');
     UserModel _userData = await UserSharedPref.getUser();
-    var request = http.MultipartRequest('POST', Uri.parse(baseUrl + 'post'));
-    request.headers['Authorization'] = 'Bearer ${_userData.token}';
-    request.fields['title'] = title;
-    request.fields['body'] = body.toString();
-    request.fields['category'] = category.toLowerCase();
-  
+    try {
+      var request = http.MultipartRequest('POST', Uri.parse(baseUrl + 'post'));
+      request.headers['Authorization'] = 'Bearer ${_userData.token}';
+      request.fields['title'] = title;
+      request.fields['body'] = body.toString();
+      request.fields['category'] = category.toLowerCase();
 
-    request.files.add(await http.MultipartFile.fromPath(
-      'image',
-      filePath.toString(),contentType: MediaType(mimeTypeData[0], mimeTypeData[1])
-     
-    ));
-    await request.send().then((value) async {
-      final res = await http.Response.fromStream(value);
-     
-    }).catchError(
-      (onError) {
-        print(onError);
-      },
-    );
-   
+      request.files.add(await http.MultipartFile.fromPath(
+          'image', filePath.toString(),
+          contentType: MediaType(mimeTypeData[0], mimeTypeData[1])));
+      final response = await request.send();
+      final res = await http.Response.fromStream(response);
+      if (res.statusCode == 201) {
+        return true;
+      }
+      return false;
+    } catch (e) {
+      print(e.toString());
+      return false;
+    }
   }
 
   Future<List<PostsModel?>?> getPosts(String category) async {
