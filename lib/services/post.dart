@@ -15,7 +15,7 @@ class PostService {
       {required String title,
       body,
       category,
-      required var image,
+     
       String? filePath}) async {
     final mimeTypeData =
         lookupMimeType(filePath.toString(), headerBytes: [0xff, 0xD8])!

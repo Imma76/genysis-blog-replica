@@ -62,13 +62,13 @@ class PostController extends ChangeNotifier {
   }
 
   Future createPost(
-      {required File image, required String category, String? filePath}) async {
+      { required String category, String? filePath}) async {
     load = true;
     notifyListeners();
     final response = await postService.createArticle(
         title: titleController.text.trim(),
         body: bodyController.text.trim(),
-        image: image,
+       
         category: category,
         filePath: filePath);
     if (response == true) {

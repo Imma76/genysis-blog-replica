@@ -23,7 +23,7 @@ class _MobileCreatePostState extends ConsumerState<MobileCreatePost> {
   List filterOption = [];
   bool selected = false;
   String filePath = '';
-  File? file;
+  String file='';
   final _picker = ImagePicker();
   // A MutableDocument is an in-memory Document. Create the starting
 // content that you want your editor to display.
@@ -257,6 +257,7 @@ class _MobileCreatePostState extends ConsumerState<MobileCreatePost> {
                                   : darkBlueColor)),
                     );
                   }).toList()),
+                  Text('$file'),
               const Gap(10),
               Row(
                 children: [
@@ -276,7 +277,7 @@ class _MobileCreatePostState extends ConsumerState<MobileCreatePost> {
                           print(result.name);
                           filePath = result.path;
                           print(filePath);
-                          file = File(result.path);
+                          file = result.name;
                         });
                       } else {
                         print('null');
@@ -285,6 +286,7 @@ class _MobileCreatePostState extends ConsumerState<MobileCreatePost> {
                       }
                     },
                     style: ElevatedButton.styleFrom(
+                      primary:darkBlueColor,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20))),
                   ),
@@ -298,7 +300,7 @@ class _MobileCreatePostState extends ConsumerState<MobileCreatePost> {
                     onPressed: () async {
                       
                       await postController.createPost(
-                          image: file as File, category: filterOption[0], filePath:filePath);
+                          category: filterOption[0], filePath:filePath);
 
                     },
                     child:postController.load?const Center(child:CircularProgressIndicator()): const Text('Post'),
